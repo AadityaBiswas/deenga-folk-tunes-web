@@ -26,7 +26,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 flex items-center justify-between">
         <a href="#" className="flex items-center group">
           <img 
-            src="/lovable-uploads/000b4342-7935-4cb1-bc4d-ee66540b38c3.png"
+            src="/lovable-uploads/8d92703c-a15e-44c9-978f-fcc99a12c571.png"
             alt="Deenga Logo"
             className={cn(
               "h-12 md:h-14 transition-transform duration-300",
