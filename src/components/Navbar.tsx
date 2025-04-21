@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
@@ -26,15 +25,18 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <a href="#" className="flex items-center group">
-          <span className={cn(
-            "font-serif text-2xl md:text-3xl font-bold tracking-wider transition-all duration-500",
-            isScrolled ? "text-white" : "text-white",
-            "group-hover:text-deenga-yellow"
-          )}>
-            DEENGA
-          </span>
+          <img 
+            src="/lovable-uploads/000b4342-7935-4cb1-bc4d-ee66540b38c3.png"
+            alt="Deenga Logo"
+            className={cn(
+              "h-12 md:h-14 transition-transform duration-300",
+              isScrolled ? "scale-90" : "scale-100"
+            )}
+          />
           {!isScrolled && (
-            <span className="hidden md:block text-white/60 ml-3 text-sm">Folk Rock | Kolkata, India</span>
+            <span className="hidden md:block text-white/60 ml-3 text-sm">
+              Folk Rock | Kolkata, India
+            </span>
           )}
         </a>
         
