@@ -1,3 +1,4 @@
+
 import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
 import AboutSection from "../components/AboutSection";
@@ -26,7 +27,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-deenga-dark to-black text-white">
       {/* Cursor follower */}
       <div 
-        className="fixed w-8 h-8 bg-deenga-purple/60 rounded-full blur-sm pointer-events-none mix-blend-screen animate-pulse"
+        className="fixed w-10 h-10 bg-deenga-yellow/50 rounded-full blur-md pointer-events-none mix-blend-screen animate-pulse"
         style={{
           left: `${mousePosition.x}px`,
           top: `${mousePosition.y}px`,
