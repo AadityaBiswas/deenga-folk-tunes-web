@@ -35,7 +35,7 @@ const Index = () => {
       {/* Main cursor orb */}
       <div 
         className={`fixed w-8 h-8 rounded-full pointer-events-none mix-blend-screen animate-pulse transition-all duration-300 z-50
-          ${isOverLink ? 'bg-deenga-purple/80 blur-md scale-125' : 'bg-deenga-purple/60 blur-sm'}`}
+          ${isOverLink ? 'bg-deenga-yellow/80 blur-md scale-125' : 'bg-deenga-yellow/60 blur-sm'}`}
         style={{
           left: `${mousePosition.x}px`,
           top: `${mousePosition.y}px`,
