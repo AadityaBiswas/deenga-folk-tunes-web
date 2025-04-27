@@ -40,7 +40,7 @@ const HeroSection = () => {
           </p>
           
           <div className={cn(
-            "flex flex-col sm:flex-row justify-center gap-6 transition-all duration-1000 delay-500 opacity-0 translate-y-4",
+            "flex justify-center transition-all duration-1000 delay-500 opacity-0 translate-y-4",
             isLoaded && "opacity-100 translate-y-0"
           )}>
             <a 
@@ -51,12 +51,6 @@ const HeroSection = () => {
                 Listen Now
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
-            </a>
-            <a 
-              href="#shows" 
-              className="px-8 py-4 border border-white/30 rounded-full hover:bg-white/10 transition-all duration-300"
-            >
-              Upcoming Shows
             </a>
           </div>
         </div>
