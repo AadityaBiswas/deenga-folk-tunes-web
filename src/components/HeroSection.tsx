@@ -15,15 +15,18 @@ const HeroSection = () => {
       id="home" 
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background with premium gradient */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: `linear-gradient(to right bottom, rgba(15, 23, 42, 0.9), rgba(88, 28, 135, 0.9)), url('/lovable-uploads/86e98c92-8dc6-4e3a-b311-11249f01f10b.png')`
-        }}
-      ></div>
+      {/* Video Background */}
+      <div className="absolute inset-0 w-full h-full">
+        <div className="absolute inset-0 bg-black/60 z-10" /> {/* Overlay to make text more readable */}
+        <iframe
+          src="https://www.youtube.com/embed/dq2bBjBMUNI?autoplay=1&mute=1&controls=0&loop=1&playlist=dq2bBjBMUNI&playsinline=1"
+          className="absolute w-full h-full object-cover"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          style={{ pointerEvents: 'none' }}
+        />
+      </div>
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-20">
         <div className="max-w-5xl mx-auto text-center space-y-8">
           <h1 className={cn(
             "text-7xl md:text-8xl lg:text-9xl font-serif font-bold bg-gradient-to-r from-white via-white/90 to-deenga-yellow/80 bg-clip-text text-transparent transition-all duration-1000 opacity-0 scale-95",
