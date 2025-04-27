@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
@@ -34,8 +33,10 @@ const Index = () => {
 
       {/* Main cursor orb */}
       <div 
-        className={`fixed w-8 h-8 rounded-full pointer-events-none mix-blend-screen animate-pulse transition-all duration-300 z-50
-          ${isOverLink ? 'bg-deenga-yellow/80 blur-md scale-125' : 'bg-deenga-yellow/60 blur-sm'}`}
+        className={`fixed rounded-full pointer-events-none mix-blend-screen animate-pulse transition-all duration-300 z-50
+          ${isOverLink 
+            ? 'w-24 h-24 bg-deenga-yellow/40 blur-xl scale-110' 
+            : 'w-16 h-16 bg-deenga-yellow/30 blur-lg'}`}
         style={{
           left: `${mousePosition.x}px`,
           top: `${mousePosition.y}px`,
