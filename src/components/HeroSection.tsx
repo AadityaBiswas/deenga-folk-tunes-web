@@ -13,14 +13,14 @@ const HeroSection = () => {
   return (
     <section 
       id="home" 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative h-screen w-screen flex items-center justify-center overflow-hidden"
     >
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full">
-        <div className="absolute inset-0 bg-black/60 z-10" /> {/* Overlay to make text more readable */}
+        <div className="absolute inset-0 bg-black/60 z-10" />
         <iframe
           src="https://www.youtube.com/embed/dq2bBjBMUNI?autoplay=1&mute=1&controls=0&loop=1&playlist=dq2bBjBMUNI&playsinline=1"
-          className="absolute w-full h-full object-cover"
+          className="absolute w-full h-full scale-150 object-cover"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           style={{ pointerEvents: 'none' }}
         />
