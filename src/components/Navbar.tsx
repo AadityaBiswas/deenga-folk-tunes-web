@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
@@ -26,14 +27,15 @@ const Navbar = () => {
     }
   };
 
-  const navItems = ["Home", "About", "Music", "Contact"];
+  // Remove "Home" from the navItems array
+  const navItems = ["About", "Music", "Contact"];
 
   return (
     <header 
       className={cn(
         "fixed top-0 left-0 w-full z-50 transition-all duration-500",
         isScrolled 
-          ? "bg-black/80 backdrop-blur-lg border-b border-white/10 py-3" 
+          ? "bg-black/95 backdrop-blur-lg border-b border-white/10 py-3" 
           : "bg-transparent py-5"
       )}
     >

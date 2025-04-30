@@ -29,7 +29,7 @@ const HeroSection = () => {
     >
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full">
-        <div className="absolute inset-0 bg-black/60 z-10" />
+        <div className="absolute inset-0 bg-black/80 z-10" />
         <iframe
           src="https://www.youtube.com/embed/dq2bBjBMUNI?autoplay=1&mute=1&controls=0&loop=1&playlist=dq2bBjBMUNI&playsinline=1"
           className="absolute w-full h-full scale-150 object-cover"
@@ -41,14 +41,14 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 relative z-20">
         <div className="max-w-5xl mx-auto text-center space-y-6">
           <h1 className={cn(
-            "text-5xl md:text-6xl lg:text-7xl font-serif font-bold bg-gradient-to-r from-white via-white/90 to-deenga-yellow/80 bg-clip-text text-transparent transition-all duration-1000 opacity-0 scale-95",
+            "text-4xl md:text-5xl lg:text-6xl font-serif font-bold bg-gradient-to-r from-white via-white/90 to-deenga-yellow/80 bg-clip-text text-transparent transition-all duration-1000 opacity-0 scale-95",
             isLoaded && "opacity-100 scale-100"
           )}>
             DEENGA
           </h1>
           
           <p className={cn(
-            "text-base md:text-lg text-white/80 max-w-xl mx-auto transition-all duration-1000 delay-300 opacity-0 translate-y-4",
+            "text-sm md:text-base text-white/80 max-w-lg mx-auto transition-all duration-1000 delay-300 opacity-0 translate-y-4",
             isLoaded && "opacity-100 translate-y-0"
           )}>
             The vibrant sounds of West Bengal's folk heritage, reimagined for today
@@ -61,7 +61,7 @@ const HeroSection = () => {
             <a 
               href="#music" 
               onClick={handleScrollToMusic}
-              className="group relative px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full overflow-hidden hover:bg-white/20 transition-all duration-500 text-sm"
+              className="group relative px-5 py-2 bg-white/10 backdrop-blur-sm text-xs sm:text-sm rounded-full overflow-hidden hover:bg-white/20 transition-all duration-500"
             >
               <span className="relative z-10 flex items-center gap-1">
                 Listen Now
