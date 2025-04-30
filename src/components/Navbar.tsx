@@ -32,28 +32,18 @@ const Navbar = () => {
 
   return (
     <header 
-      className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-500",
-        isScrolled 
-          ? "bg-black/95 backdrop-blur-lg border-b border-white/10 py-3" 
-          : "bg-transparent py-5"
-      )}
+      className="fixed top-0 left-0 w-full z-50 bg-black/95 backdrop-blur-lg border-b border-white/10 py-3"
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <a href="#" className="flex items-center group">
           <img 
             src="/lovable-uploads/8d92703c-a15e-44c9-978f-fcc99a12c571.png"
             alt="Deenga Logo"
-            className={cn(
-              "h-12 md:h-14 transition-transform duration-300",
-              isScrolled ? "scale-90" : "scale-100"
-            )}
+            className="h-12 md:h-14 transition-transform duration-300"
           />
-          {!isScrolled && (
-            <span className="hidden md:block text-white/60 ml-3 text-sm">
-              Folk Rock | Kolkata, India
-            </span>
-          )}
+          <span className="hidden md:block text-white/60 ml-3 text-sm">
+            Folk Rock | Kolkata, India
+          </span>
         </a>
         
         <button 

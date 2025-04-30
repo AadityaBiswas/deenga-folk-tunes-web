@@ -51,6 +51,13 @@ const Index = () => {
       {/* Background overlay for darker effect */}
       <div className="absolute inset-0 bg-black z-0" />
 
+      {/* Hide default cursor when orb is visible */}
+      <style jsx global>{`
+        body {
+          cursor: ${isOverLink ? 'none' : 'auto'};
+        }
+      `}</style>
+
       {/* Main cursor orb */}
       <div 
         className={`fixed rounded-full pointer-events-none mix-blend-screen animate-pulse transition-all duration-300 z-50

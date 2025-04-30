@@ -91,8 +91,12 @@
     @apply border-border;
   }
 
+  html {
+    @apply bg-black;
+  }
+
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-black text-foreground font-sans;
     /* Remove scrollbars for the entire body */
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -122,6 +126,11 @@
     display: none;
     width: 0;
     height: 0;
+  }
+  
+  /* Custom cursor styles */
+  a, button, [role="button"] {
+    cursor: none;
   }
 }
 
