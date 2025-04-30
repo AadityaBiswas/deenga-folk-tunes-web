@@ -52,12 +52,12 @@ const AlbumSection = () => {
   ];
 
   return (
-    <section id="music" className="section-padding bg-gray-50">
+    <section id="music" className="section-padding bg-black">
       <div className="container mx-auto px-4">
-        <h2 className="section-heading text-center">Our <span className="text-deenga-purple">Music</span></h2>
+        <h2 className="section-heading text-center text-white">Our <span className="text-deenga-purple">Music</span></h2>
         
         <div className="mb-16">
-          <h3 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">Featured Songs</h3>
+          <h3 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8 text-white">Featured Songs</h3>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {featuredSongs.map((song) => (
               <MusicPlayer
@@ -71,11 +71,11 @@ const AlbumSection = () => {
           </div>
         </div>
         
-        <h3 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">Albums</h3>
+        <h3 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8 text-white">Albums</h3>
         
         <div className="space-y-16">
           {albums.map((album) => (
-            <div key={album.id} className="bg-white rounded-2xl p-6 md:p-8 shadow-md">
+            <div key={album.id} className="bg-black border border-gray-800 rounded-2xl p-6 md:p-8 shadow-md">
               <div className="grid md:grid-cols-3 gap-8 items-center">
                 <div>
                   <div className="relative w-full max-w-xs mx-auto md:mx-0">
@@ -90,19 +90,19 @@ const AlbumSection = () => {
                 
                 <div className="md:col-span-2">
                   <div className="flex items-center justify-between mb-4">
-                    <h4 className="font-serif text-2xl md:text-3xl font-bold text-deenga-dark">
+                    <h4 className="font-serif text-2xl md:text-3xl font-bold text-white">
                       {album.title}
                     </h4>
                     <span className="text-deenga-purple font-medium">{album.year}</span>
                   </div>
                   
                   <div className="mb-6">
-                    <h5 className="font-medium text-gray-700 mb-3">Tracklist:</h5>
+                    <h5 className="font-medium text-gray-300 mb-3">Tracklist:</h5>
                     <div className="grid grid-cols-2 gap-x-8 gap-y-2">
                       {album.tracks.map((track, index) => (
                         <div key={track.title} className="flex items-center group">
                           <span className="w-6 text-deenga-purple font-medium">{index + 1}</span>
-                          <span className="text-gray-700 group-hover:text-deenga-purple transition-colors">
+                          <span className="text-gray-300 group-hover:text-deenga-purple transition-colors">
                             {track.title}
                           </span>
                         </div>

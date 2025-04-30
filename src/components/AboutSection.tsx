@@ -13,9 +13,9 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="section-padding bg-white">
+    <section id="about" className="section-padding bg-black">
       <div className="container mx-auto px-4">
-        <h2 className="section-heading text-center">About <span className="text-deenga-purple">Deenga</span></h2>
+        <h2 className="section-heading text-center text-white">About <span className="text-deenga-purple">Deenga</span></h2>
         
         <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
           <div className="relative">
@@ -31,33 +31,33 @@ const AboutSection = () => {
           </div>
           
           <div className="space-y-4">
-            <p className="text-lg leading-relaxed text-gray-700">
-              With over <span className="font-medium text-deenga-dark">23 years of experience</span> in performing live concerts, 
+            <p className="text-lg leading-relaxed text-gray-300">
+              With over <span className="font-medium text-white">23 years of experience</span> in performing live concerts, 
               Deenga has established itself as a pioneering folk band in India. Our music is a vibrant 
               representation of rural West Bengal's rich cultural heritage, blended with contemporary elements.
             </p>
-            <p className="text-lg leading-relaxed text-gray-700">
+            <p className="text-lg leading-relaxed text-gray-300">
               We've released two acclaimed albums that showcase our musical journey:
             </p>
             <ul className="space-y-2 pl-5">
-              <li className="text-lg text-gray-700 flex items-start">
+              <li className="text-lg text-gray-300 flex items-start">
                 <span className="inline-block w-2 h-2 rounded-full bg-deenga-purple mt-2 mr-2"></span>
                 <span><strong>"Doob Satar"</strong> (2013) - featuring 6 rural folk numbers blended with modern elements (Universal Music India)</span>
               </li>
-              <li className="text-lg text-gray-700 flex items-start">
+              <li className="text-lg text-gray-300 flex items-start">
                 <span className="inline-block w-2 h-2 rounded-full bg-deenga-purple mt-2 mr-2"></span>
                 <span><strong>"Ghum Bhangche"</strong> (2023) - our latest album showcasing our growth and versatility</span>
               </li>
             </ul>
             <div className="pt-4">
-              <h3 className="font-serif text-xl font-semibold text-deenga-dark mb-4">The Band</h3>
+              <h3 className="font-serif text-xl font-semibold text-white mb-4">The Band</h3>
               <div className="grid grid-cols-2 gap-x-8 gap-y-3">
                 {bandMembers.map((member) => (
                   <div key={member.name} className="group">
-                    <p className="font-medium text-deenga-dark group-hover:text-deenga-purple transition-colors">
+                    <p className="font-medium text-white group-hover:text-deenga-purple transition-colors">
                       {member.name}
                     </p>
-                    <p className="text-sm text-gray-500">{member.role}</p>
+                    <p className="text-sm text-gray-400">{member.role}</p>
                   </div>
                 ))}
               </div>
