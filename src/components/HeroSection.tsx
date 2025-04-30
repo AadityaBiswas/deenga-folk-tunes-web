@@ -7,7 +7,11 @@ const HeroSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setIsLoaded(true);
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 5000); // Set 5 second delay for initial fade-in
+
+    return () => clearTimeout(timer);
   }, []);
 
   const handleScrollToMusic = (e: React.MouseEvent) => {
@@ -51,8 +55,8 @@ const HeroSection = () => {
           </p>
           
           <div className={cn(
-            "flex justify-center transition-all duration-1000 delay-500 opacity-0 translate-y-4",
-            isLoaded && "opacity-100 translate-y-0"
+            "flex justify-center transition-all duration-1000 opacity-0 translate-y-4",
+            isLoaded && "opacity-100 translate-y-0 delay-[2000ms]" // 7 seconds total (5s initial delay + 2s additional delay)
           )}>
             <a 
               href="#music" 

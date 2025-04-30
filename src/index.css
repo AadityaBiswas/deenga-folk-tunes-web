@@ -93,6 +93,35 @@
 
   body {
     @apply bg-background text-foreground font-sans;
+    /* Remove scrollbars for the entire body */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  /* Hide all scrollbars */
+  body::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  /* Hide scrollbars for all elements */
+  ::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  
+  /* Remove scrollbars from all divs and other elements */
+  div {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  div::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
   }
 }
 
