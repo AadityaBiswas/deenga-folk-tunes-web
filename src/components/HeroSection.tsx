@@ -10,6 +10,14 @@ const HeroSection = () => {
     setIsLoaded(true);
   }, []);
 
+  const handleScrollToMusic = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const musicSection = document.getElementById("music");
+    if (musicSection) {
+      musicSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <section 
       id="home" 
@@ -27,16 +35,16 @@ const HeroSection = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-20">
-        <div className="max-w-5xl mx-auto text-center space-y-8">
+        <div className="max-w-5xl mx-auto text-center space-y-6">
           <h1 className={cn(
-            "text-7xl md:text-8xl lg:text-9xl font-serif font-bold bg-gradient-to-r from-white via-white/90 to-deenga-yellow/80 bg-clip-text text-transparent transition-all duration-1000 opacity-0 scale-95",
+            "text-5xl md:text-6xl lg:text-7xl font-serif font-bold bg-gradient-to-r from-white via-white/90 to-deenga-yellow/80 bg-clip-text text-transparent transition-all duration-1000 opacity-0 scale-95",
             isLoaded && "opacity-100 scale-100"
           )}>
             DEENGA
           </h1>
           
           <p className={cn(
-            "text-xl md:text-2xl text-white/80 max-w-2xl mx-auto transition-all duration-1000 delay-300 opacity-0 translate-y-4",
+            "text-base md:text-lg text-white/80 max-w-xl mx-auto transition-all duration-1000 delay-300 opacity-0 translate-y-4",
             isLoaded && "opacity-100 translate-y-0"
           )}>
             The vibrant sounds of West Bengal's folk heritage, reimagined for today
@@ -48,11 +56,12 @@ const HeroSection = () => {
           )}>
             <a 
               href="#music" 
-              className="group relative px-8 py-4 bg-white/10 backdrop-blur-sm rounded-full overflow-hidden hover:bg-white/20 transition-all duration-500"
+              onClick={handleScrollToMusic}
+              className="group relative px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full overflow-hidden hover:bg-white/20 transition-all duration-500 text-sm"
             >
-              <span className="relative z-10 flex items-center gap-2">
+              <span className="relative z-10 flex items-center gap-1">
                 Listen Now
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </a>
           </div>
