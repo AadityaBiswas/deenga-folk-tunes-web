@@ -1,19 +1,9 @@
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -32,7 +22,7 @@ const Navbar = () => {
 
   return (
     <header 
-      className="fixed top-0 left-0 w-full z-50 bg-black/95 backdrop-blur-lg border-b border-white/10 py-3"
+      className="fixed top-0 left-0 w-full z-50 bg-transparent backdrop-blur-sm py-3"
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <a href="#" className="flex items-center group">

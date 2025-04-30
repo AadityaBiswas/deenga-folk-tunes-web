@@ -52,11 +52,13 @@ const Index = () => {
       <div className="absolute inset-0 bg-black z-0" />
 
       {/* Hide default cursor when orb is visible */}
-      <style jsx global>{`
-        body {
-          cursor: ${isOverLink ? 'none' : 'auto'};
-        }
-      `}</style>
+      <style>
+        {`
+          body {
+            cursor: ${isOverLink ? 'none' : 'auto'};
+          }
+        `}
+      </style>
 
       {/* Main cursor orb */}
       <div 
