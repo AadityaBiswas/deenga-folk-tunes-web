@@ -1,9 +1,20 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Only show navbar when at the top of the page (landing section)
+      setIsVisible(window.scrollY < window.innerHeight * 0.5);
+    };
+    
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -22,7 +33,10 @@ const Navbar = () => {
 
   return (
     <header 
-      className="fixed top-0 left-0 w-full z-50 bg-transparent backdrop-blur-sm py-3"
+      className={cn(
+        "fixed top-0 left-0 w-full z-50 bg-transparent backdrop-blur-sm py-3 transition-all duration-500",
+        isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+      )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <a href="#" className="flex items-center group">
