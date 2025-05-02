@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
 import AboutSection from "../components/AboutSection";
 import AlbumSection from "../components/AlbumSection";
+import EventsSection from "../components/EventsSection";
 import ContactSection from "../components/ContactSection";
 import Footer from "../components/Footer";
 import { ArrowUp } from "lucide-react";
@@ -47,19 +48,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#1A1F2C] text-white relative">
-      {/* Background overlay for darker effect */}
-      <div className="absolute inset-0 bg-[#1A1F2C] z-0" />
-
-      {/* Hide default cursor when orb is visible */}
-      <style>
-        {`
-          body {
-            cursor: ${isOverLink ? 'none' : 'auto'};
-          }
-        `}
-      </style>
-
+    <div className="min-h-screen relative">
       {/* Main cursor orb */}
       <div 
         className={`fixed rounded-full pointer-events-none mix-blend-screen animate-pulse transition-all duration-300 z-50
@@ -73,6 +62,15 @@ const Index = () => {
           transition: 'all 0.05s ease-out'
         }}
       />
+      
+      {/* Hide default cursor when orb is visible */}
+      <style>
+        {`
+          body {
+            cursor: ${isOverLink ? 'none' : 'auto'};
+          }
+        `}
+      </style>
       
       {/* Scroll to top button */}
       <button
@@ -92,6 +90,7 @@ const Index = () => {
         <HeroSection />
         <AboutSection />
         <AlbumSection />
+        <EventsSection />
         <ContactSection />
         <Footer />
       </div>

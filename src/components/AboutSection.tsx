@@ -13,8 +13,11 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="section-padding bg-[#1A1F2C]">
-      <div className="container mx-auto px-4">
+    <section id="about" className="section-padding bg-black relative">
+      {/* Gradient overlay for transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-[#141824] z-0"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <h2 className="section-heading text-center text-white">About <span className="text-deenga-purple">Deenga</span></h2>
         
         <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center">

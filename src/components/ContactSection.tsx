@@ -19,8 +19,8 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="section-padding bg-black">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="section-padding relative bg-gradient-to-b from-[#161A26] to-[#13151D]">
+      <div className="container mx-auto px-4 relative z-10">
         <h2 className="section-heading text-center text-white">Get in <span className="text-deenga-purple">Touch</span></h2>
         
         <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
@@ -60,7 +60,7 @@ const ContactSection = () => {
                     href="https://www.facebook.com/official.deenga"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-deenga-dark flex items-center justify-center hover:bg-deenga-purple transition-colors duration-300"
+                    className="w-10 h-10 rounded-full bg-[#0f1219] flex items-center justify-center hover:bg-deenga-purple transition-colors duration-300"
                     aria-label="Facebook"
                   >
                     <Facebook className="h-5 w-5 text-white" />
@@ -69,7 +69,7 @@ const ContactSection = () => {
                     href="https://www.instagram.com/deengaofficial"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-deenga-dark flex items-center justify-center hover:bg-deenga-purple transition-colors duration-300"
+                    className="w-10 h-10 rounded-full bg-[#0f1219] flex items-center justify-center hover:bg-deenga-purple transition-colors duration-300"
                     aria-label="Instagram"
                   >
                     <Instagram className="h-5 w-5 text-white" />
@@ -78,7 +78,7 @@ const ContactSection = () => {
                     href="https://youtube.com/@deengaofficial"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-deenga-dark flex items-center justify-center hover:bg-deenga-purple transition-colors duration-300"
+                    className="w-10 h-10 rounded-full bg-[#0f1219] flex items-center justify-center hover:bg-deenga-purple transition-colors duration-300"
                     aria-label="YouTube"
                   >
                     <Youtube className="h-5 w-5 text-white" />
@@ -87,7 +87,7 @@ const ContactSection = () => {
                     href="https://open.spotify.com/artist/1zx7gKZWy8NJWCSYtMmdTD"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-deenga-dark flex items-center justify-center hover:bg-deenga-purple transition-colors duration-300"
+                    className="w-10 h-10 rounded-full bg-[#0f1219] flex items-center justify-center hover:bg-deenga-purple transition-colors duration-300"
                     aria-label="Spotify"
                   >
                     <Music className="h-5 w-5 text-white" />
@@ -101,7 +101,7 @@ const ContactSection = () => {
             <h3 className="text-2xl font-serif font-semibold text-white mb-6">Send us a Message</h3>
             
             {isSubmitted ? (
-              <div className="bg-gray-900 border border-gray-700 rounded-lg p-6 text-center">
+              <div className="bg-[#0f1219]/70 border border-gray-700 rounded-lg p-6 text-center">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-green-500 mb-4 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -123,7 +123,7 @@ const ContactSection = () => {
                       type="text"
                       id="name"
                       required
-                      className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-deenga-purple/50 text-white"
+                      className="w-full px-4 py-2 bg-[#0f1219]/70 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-deenga-purple/50 text-white"
                     />
                   </div>
                   <div>
@@ -132,7 +132,7 @@ const ContactSection = () => {
                       type="email"
                       id="email"
                       required
-                      className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-deenga-purple/50 text-white"
+                      className="w-full px-4 py-2 bg-[#0f1219]/70 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-deenga-purple/50 text-white"
                     />
                   </div>
                 </div>
@@ -143,7 +143,7 @@ const ContactSection = () => {
                     type="text"
                     id="subject"
                     required
-                    className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-deenga-purple/50 text-white"
+                    className="w-full px-4 py-2 bg-[#0f1219]/70 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-deenga-purple/50 text-white"
                   />
                 </div>
                 
@@ -153,7 +153,7 @@ const ContactSection = () => {
                     id="message"
                     rows={5}
                     required
-                    className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-deenga-purple/50 text-white"
+                    className="w-full px-4 py-2 bg-[#0f1219]/70 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-deenga-purple/50 text-white"
                   ></textarea>
                 </div>
                 

@@ -57,15 +57,23 @@ const EventsSection = () => {
   return (
     <section 
       id="shows" 
-      className="section-padding relative"
-      style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(88, 28, 135, 0.9)), url('/lovable-uploads/046893b7-e5e5-4e6b-b51c-a376b03b0b22.png')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
-      }}
+      className="section-padding relative bg-gradient-to-b from-[#172032] to-[#191E2B]"
     >
-      <div className="container mx-auto px-4">
+      {/* Background image with overlay */}
+      <div 
+        className="absolute inset-0 opacity-30 z-0"
+        style={{
+          backgroundImage: `url('/lovable-uploads/046893b7-e5e5-4e6b-b51c-a376b03b0b22.png')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}
+      ></div>
+      
+      {/* Gradient overlay for transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-[#161A26] z-0"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <h2 className="section-heading text-center text-white">Upcoming <span className="text-deenga-yellow">Shows</span></h2>
         
         <div className="grid gap-6 max-w-4xl mx-auto">
@@ -73,8 +81,8 @@ const EventsSection = () => {
             <div 
               key={event.id}
               className={cn(
-                "bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20 group hover:bg-white/20 transition-colors duration-300",
-                event.isHighlighted && "bg-deenga-purple/20 border-deenga-purple/40"
+                "bg-white/5 backdrop-blur-md rounded-lg p-6 border border-white/10 group hover:bg-white/10 transition-colors duration-300",
+                event.isHighlighted && "bg-deenga-purple/10 border-deenga-purple/30"
               )}
             >
               <div className="md:flex items-center justify-between">
