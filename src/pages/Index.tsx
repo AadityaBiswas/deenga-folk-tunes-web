@@ -11,16 +11,23 @@ import { cn } from "@/lib/utils";
 
 const Index = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > window.innerHeight * 0.5);
     };
 
+    const updateMousePosition = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', updateMousePosition);
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', updateMousePosition);
     };
   }, []);
 
@@ -33,6 +40,15 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative">
+      {/* Custom cursor glow effect */}
+      <div
+        className="fixed w-48 h-48 rounded-full bg-deenga-yellow/20 backdrop-blur-sm pointer-events-none z-50 transition-transform duration-100"
+        style={{
+          transform: `translate(${mousePosition.x - 96}px, ${mousePosition.y - 96}px)`,
+          opacity: 0.6,
+        }}
+      />
+
       {/* Scroll to top button */}
       <button
         onClick={scrollToTop}
