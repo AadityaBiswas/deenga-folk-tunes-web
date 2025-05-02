@@ -13,7 +13,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="section-padding bg-black">
+    <section id="about" className="section-padding bg-[#1A1F2C]">
       <div className="container mx-auto px-4">
         <h2 className="section-heading text-center text-white">About <span className="text-deenga-purple">Deenga</span></h2>
         

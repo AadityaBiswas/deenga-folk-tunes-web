@@ -92,11 +92,11 @@
   }
 
   html {
-    @apply bg-black;
+    @apply bg-[#1A1F2C];
   }
 
   body {
-    @apply bg-black text-foreground font-sans;
+    @apply bg-[#1A1F2C] text-foreground font-sans;
     /* Remove scrollbars for the entire body */
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -136,7 +136,7 @@
 
 @layer components {
   .bg-blur {
-    @apply bg-black/50 backdrop-blur-sm;
+    @apply bg-[#1A1F2C]/50 backdrop-blur-sm;
   }
   
   .music-button {

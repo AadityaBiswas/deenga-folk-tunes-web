@@ -47,9 +47,9 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white relative">
+    <div className="min-h-screen bg-[#1A1F2C] text-white relative">
       {/* Background overlay for darker effect */}
-      <div className="absolute inset-0 bg-black z-0" />
+      <div className="absolute inset-0 bg-[#1A1F2C] z-0" />
 
       {/* Hide default cursor when orb is visible */}
       <style>
