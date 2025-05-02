@@ -69,6 +69,10 @@ export default {
 					'pink': '#ec4899',
 					'yellow': '#facc15',
 					'dark': '#0f172a',
+					'gold': '#F5B841',
+					'amber': '#FF9F1C',
+					'teal': '#38B2AC',
+					'rose': '#FB7185',
 				},
 			},
 			fontFamily: {
@@ -79,6 +83,9 @@ export default {
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'hero-pattern': 'linear-gradient(to right bottom, rgba(23, 37, 84, 0.8), rgba(139, 92, 246, 0.8))',
+				'gold-gradient': 'linear-gradient(to right, #F5B841, #FFD700)',
+				'purple-gradient': 'linear-gradient(to right, #8B5CF6, #C084FC)',
+				'dark-gradient': 'linear-gradient(to bottom, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.8))',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -117,6 +124,10 @@ export default {
 				pulse: {
 					'0%, 100%': { opacity: '1' },
 					'50%': { opacity: '0.5' },
+				},
+				shimmer: {
+					'0%': { backgroundPosition: '-200% 0' },
+					'100%': { backgroundPosition: '200% 0' },
 				}
 			},
 			animation: {
@@ -126,6 +137,7 @@ export default {
 				'fade-in-slow': 'fadeInSlow 1.2s ease-out',
 				'float': 'float 6s ease-in-out infinite',
 				'pulse-slow': 'pulse 4s ease-in-out infinite',
+				'shimmer': 'shimmer 2s infinite linear',
 			}
 		}
 	},
