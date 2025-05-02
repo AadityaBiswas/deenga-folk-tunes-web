@@ -63,7 +63,7 @@ const HeroSection = () => {
               onClick={handleScrollToMusic}
               className="group relative px-5 py-2 bg-white/10 backdrop-blur-sm text-xs sm:text-sm rounded-full overflow-hidden hover:bg-white/20 transition-all duration-500"
             >
-              <span className="relative z-10 flex items-center gap-1">
+              <span className="relative z-10 flex items-center gap-1 text-white/90">
                 Listen Now
                 <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
