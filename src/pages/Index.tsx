@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 const Index = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [glowOpacity, setGlowOpacity] = useState(0.6);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,12 +23,21 @@ const Index = () => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
+    // Create flickering effect for the glow
+    const flickerInterval = setInterval(() => {
+      setGlowOpacity(prevOpacity => {
+        // Random opacity between 0.3 and 0.7
+        return 0.3 + Math.random() * 0.4;
+      });
+    }, 700); // Change opacity every 700ms
+
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', updateMousePosition);
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', updateMousePosition);
+      clearInterval(flickerInterval);
     };
   }, []);
 
@@ -42,10 +52,10 @@ const Index = () => {
     <div className="min-h-screen relative">
       {/* Custom cursor glow effect */}
       <div
-        className="fixed w-48 h-48 rounded-full bg-deenga-yellow/20 backdrop-blur-sm pointer-events-none z-50 transition-transform duration-100"
+        className="fixed w-32 h-32 rounded-full bg-deenga-yellow/20 backdrop-blur-sm pointer-events-none z-50 transition-all duration-300"
         style={{
-          transform: `translate(${mousePosition.x - 96}px, ${mousePosition.y - 96}px)`,
-          opacity: 0.6,
+          transform: `translate(${mousePosition.x - 64}px, ${mousePosition.y - 64}px)`,
+          opacity: glowOpacity,
         }}
       />
 

@@ -5,22 +5,14 @@ import { ArrowRight } from "lucide-react";
 
 const HeroSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoaded(true);
     }, 5000); // Set 5 second delay for initial fade-in
 
-    const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', updateMousePosition);
-
     return () => {
       clearTimeout(timer);
-      window.removeEventListener('mousemove', updateMousePosition);
     };
   }, []);
 
@@ -48,17 +40,11 @@ const HeroSection = () => {
         />
       </div>
       
-      {/* Custom cursor glow effect */}
-      <div
-        className="fixed w-48 h-48 rounded-full bg-deenga-yellow/20 backdrop-blur-sm pointer-events-none z-50 transition-transform duration-100"
-        style={{
-          transform: `translate(${mousePosition.x - 96}px, ${mousePosition.y - 96}px)`,
-          opacity: 0.6,
-        }}
-      />
-      
-      {/* Gradient overlay at the bottom for smooth transition to About section */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#1A1F2C] z-20"></div>
+      {/* Bottom overlay with same color as About section for seamless transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-[#1A1F2C] z-20" style={{
+        maskImage: 'linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))',
+        WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))'
+      }}></div>
       
       <div className="container mx-auto px-4 relative z-20">
         <div className="max-w-5xl mx-auto text-center space-y-6">

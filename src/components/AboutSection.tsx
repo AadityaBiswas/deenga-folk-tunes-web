@@ -14,8 +14,8 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="section-padding bg-[#1A1F2C] relative">
-      {/* Gradient overlay at the top for a smooth transition from the hero section */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black/40 to-transparent z-0"></div>
+      {/* Seamless connection to hero section - no gradient, same color */}
+      <div className="absolute -top-12 left-0 right-0 h-12 bg-[#1A1F2C] z-0"></div>
       
       {/* Gradient overlay for transition to next section */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-[#141824] z-0"></div>
