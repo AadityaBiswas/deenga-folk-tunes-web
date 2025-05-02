@@ -60,7 +60,7 @@ const MusicPlayer = ({ title, artistName, coverImage, audioSrc, spotifyUrl }: Pl
   };
 
   return (
-    <div className="flex flex-col bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 h-full">
+    <div className="flex flex-col bg-[#14141c] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 h-full">
       <div className="relative aspect-square overflow-hidden group">
         <img 
           src={coverImage} 
@@ -94,8 +94,8 @@ const MusicPlayer = ({ title, artistName, coverImage, audioSrc, spotifyUrl }: Pl
       </div>
       <div className="p-4 flex-grow flex flex-col justify-between">
         <div>
-          <h3 className="font-medium text-lg text-deenga-dark">{title}</h3>
-          {artistName && <p className="text-sm text-gray-500">{artistName}</p>}
+          <h3 className="font-medium text-lg text-white">{title}</h3>
+          {artistName && <p className="text-sm text-gray-400">{artistName}</p>}
         </div>
         <a 
           href={spotifyUrl} 

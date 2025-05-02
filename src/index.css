@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -92,11 +91,11 @@
   }
 
   html {
-    @apply bg-black;
+    @apply bg-[#1A1F2C];
   }
 
   body {
-    @apply bg-black text-foreground font-sans;
+    @apply bg-[#1A1F2C] text-foreground font-sans;
     /* Remove scrollbars for the entire body */
     scrollbar-width: none;
     -ms-overflow-style: none;

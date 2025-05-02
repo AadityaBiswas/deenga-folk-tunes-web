@@ -19,7 +19,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="section-padding relative bg-gradient-to-b from-[#161A26] to-[#13151D]">
+    <section id="contact" className="section-padding relative bg-gradient-to-b from-[#172032] to-[#13151D]">
       <div className="container mx-auto px-4 relative z-10">
         <h2 className="section-heading text-center text-white">Get in <span className="text-deenga-purple">Touch</span></h2>
         

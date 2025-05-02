@@ -63,13 +63,15 @@ const AlbumSection = () => {
           <h3 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8 text-white">Featured Songs</h3>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {featuredSongs.map((song) => (
-              <MusicPlayer
-                key={song.title}
-                title={song.title}
-                artistName={song.artistName}
-                coverImage={song.coverImage}
-                spotifyUrl={song.spotifyUrl}
-              />
+              <div key={song.title} className="bg-[#14141c]/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 overflow-hidden">
+                <MusicPlayer
+                  key={song.title}
+                  title={song.title}
+                  artistName={song.artistName}
+                  coverImage={song.coverImage}
+                  spotifyUrl={song.spotifyUrl}
+                />
+              </div>
             ))}
           </div>
         </div>
