@@ -34,7 +34,7 @@ const Navbar = () => {
   return (
     <header 
       className={cn(
-        "fixed top-0 left-0 w-full z-50 bg-transparent backdrop-blur-sm py-3 transition-all duration-500",
+        "fixed top-0 left-0 w-full z-50 bg-transparent py-3 transition-all duration-500",
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
     >
@@ -87,7 +87,7 @@ const Navbar = () => {
       </div>
       
       <nav className={cn(
-        "md:hidden absolute w-full transition-all duration-500 ease-in-out bg-black/95 backdrop-blur-md border-t border-white/10",
+        "md:hidden absolute w-full transition-all duration-500 ease-in-out bg-black/80 backdrop-blur-md border-t border-white/10",
         isMenuOpen ? "max-h-screen py-4 opacity-100" : "max-h-0 py-0 opacity-0 overflow-hidden"
       )}>
         <div className="container mx-auto px-4 flex flex-col gap-4">

@@ -27,15 +27,15 @@ const HeroSection = () => {
   return (
     <section 
       id="home" 
-      className="relative h-screen w-screen flex items-center justify-center overflow-hidden"
+      className="relative h-screen w-full flex items-center justify-center overflow-hidden"
     >
-      {/* Video Background with full coverage and black tint overlay */}
+      {/* Video Background with full coverage and dark tint overlay */}
       <div className="absolute inset-0 w-full h-full">
-        {/* Black tint overlay - increased opacity to 0.65 for darker overlay */}
+        {/* Black tint overlay */}
         <div className="absolute inset-0 bg-black/65 z-10" />
         <iframe
           src="https://www.youtube.com/embed/dq2bBjBMUNI?autoplay=1&mute=1&controls=0&loop=1&playlist=dq2bBjBMUNI&playsinline=1"
-          className="absolute w-full h-full object-cover"
+          className="absolute w-[100vw] h-[100vh] object-cover"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           style={{ pointerEvents: 'none' }}
         />
