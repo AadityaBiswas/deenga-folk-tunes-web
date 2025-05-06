@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 const Index = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [glowSize, setGlowSize] = useState(24);
   const [glowOpacity, setGlowOpacity] = useState(0.6);
 
   useEffect(() => {
@@ -23,13 +24,18 @@ const Index = () => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    // Create subtle flickering effect for the glow
-    const flickerInterval = setInterval(() => {
-      setGlowOpacity(prevOpacity => {
-        // More subtle random opacity between 0.4 and 0.6
-        return 0.4 + Math.random() * 0.2;
+    // Create a pulsating animation effect for the glow
+    const pulseInterval = setInterval(() => {
+      setGlowSize(prevSize => {
+        // Subtle size pulsation between 22px and 26px
+        return Math.sin(Date.now() / 1000) * 2 + 24;
       });
-    }, 1000); // Slower flickering interval (1 second)
+      
+      setGlowOpacity(prevOpacity => {
+        // Subtle opacity pulsation between 0.45 and 0.65
+        return 0.45 + Math.sin(Date.now() / 800) * 0.1 + 0.1;
+      });
+    }, 50); // Update more frequently for smoother animation
 
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', updateMousePosition);
@@ -37,7 +43,7 @@ const Index = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', updateMousePosition);
-      clearInterval(flickerInterval);
+      clearInterval(pulseInterval);
     };
   }, []);
 
@@ -50,17 +56,18 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative">
-      {/* Custom cursor glow effect */}
+      {/* Custom cursor glow effect with animation */}
       <div
-        className="fixed rounded-full bg-deenga-yellow/20 pointer-events-none z-50"
+        className="fixed rounded-full pointer-events-none z-50"
         style={{
-          width: '24px',
-          height: '24px',
-          transform: `translate(${mousePosition.x - 12}px, ${mousePosition.y - 12}px)`,
+          width: `${glowSize}px`,
+          height: `${glowSize}px`,
+          transform: `translate(${mousePosition.x - glowSize/2}px, ${mousePosition.y - glowSize/2}px)`,
           opacity: glowOpacity,
-          boxShadow: '0 0 15px 2px rgba(255, 214, 0, 0.6)',
-          transition: 'opacity 0.3s ease',
-          willChange: 'transform', // Optimize for animations
+          boxShadow: `0 0 15px 2px rgba(250, 204, 21, 0.6)`, 
+          background: 'radial-gradient(circle, rgba(250,204,21,0.4) 0%, rgba(250,204,21,0.2) 60%, rgba(250,204,21,0) 100%)',
+          transition: 'box-shadow 0.3s ease',
+          willChange: 'transform, opacity, width, height',
         }}
       />
 
