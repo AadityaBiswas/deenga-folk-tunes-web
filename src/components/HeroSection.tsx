@@ -40,9 +40,10 @@ const HeroSection = () => {
         />
       </div>
       
-      {/* Enhanced bottom transition overlay - more subtle and matching About section perfectly */}
-      <div className="absolute bottom-0 left-0 right-0 h-56 z-20" style={{
-        background: 'linear-gradient(to top, #1A1F2C 15%, rgba(26, 31, 44, 0.8) 50%, rgba(26, 31, 44, 0) 100%)'
+      {/* Bottom overlay with same color as About section for seamless transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-[#1A1F2C] z-20" style={{
+        maskImage: 'linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))',
+        WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))'
       }}></div>
       
       <div className="container mx-auto px-4 relative z-20">
