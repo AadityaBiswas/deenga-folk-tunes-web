@@ -24,16 +24,16 @@ const Index = () => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    // Create a more prominent pulsating animation effect for the glow
+    // Create a more natural pulsating animation effect for the glow
     const pulseInterval = setInterval(() => {
       setGlowSize(prevSize => {
-        // More noticeable size pulsation between 28px and 36px
-        return Math.sin(Date.now() / 800) * 4 + 32;
+        // More natural size pulsation between 29px and 35px
+        return Math.sin(Date.now() / 1200) * 3 + 32;
       });
       
       setGlowOpacity(prevOpacity => {
-        // More pronounced opacity pulsation between 0.55 and 0.85
-        return 0.55 + Math.sin(Date.now() / 600) * 0.15 + 0.15;
+        // Subtle opacity pulsation between 0.6 and 0.8
+        return 0.6 + Math.sin(Date.now() / 1000) * 0.1 + 0.1;
       });
     }, 30); // Update more frequently for smoother animation
 
@@ -56,17 +56,18 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative">
-      {/* Custom cursor glow effect with more prominent animation */}
+      {/* Natural cursor glow effect without concentric circles */}
       <div
-        className="fixed rounded-full pointer-events-none z-50"
+        className="fixed pointer-events-none z-50"
         style={{
           width: `${glowSize}px`,
           height: `${glowSize}px`,
           transform: `translate(${mousePosition.x - glowSize/2}px, ${mousePosition.y - glowSize/2}px)`,
           opacity: glowOpacity,
-          boxShadow: `0 0 20px 5px rgba(250, 204, 21, 0.7)`, 
-          background: 'radial-gradient(circle, rgba(250,204,21,0.5) 0%, rgba(250,204,21,0.3) 60%, rgba(250,204,21,0) 100%)',
-          transition: 'box-shadow 0.3s ease',
+          borderRadius: '50%',
+          background: 'rgba(250, 204, 21, 0.3)',
+          boxShadow: `0 0 25px 8px rgba(250, 204, 21, 0.5)`,
+          filter: 'blur(5px)',
           willChange: 'transform, opacity, width, height',
         }}
       />

@@ -29,22 +29,17 @@ const HeroSection = () => {
       id="home" 
       className="relative h-screen w-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Video Background */}
+      {/* Video Background with full coverage and black tint overlay */}
       <div className="absolute inset-0 w-full h-full">
-        <div className="absolute inset-0 bg-black/80 z-10" />
+        {/* Black tint overlay - increased opacity to 0.65 for darker overlay */}
+        <div className="absolute inset-0 bg-black/65 z-10" />
         <iframe
           src="https://www.youtube.com/embed/dq2bBjBMUNI?autoplay=1&mute=1&controls=0&loop=1&playlist=dq2bBjBMUNI&playsinline=1"
-          className="absolute w-full h-full scale-150 object-cover"
+          className="absolute w-full h-full object-cover"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           style={{ pointerEvents: 'none' }}
         />
       </div>
-      
-      {/* Bottom overlay with same color as About section for seamless transition */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-[#1A1F2C] z-20" style={{
-        maskImage: 'linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))',
-        WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))'
-      }}></div>
       
       <div className="container mx-auto px-4 relative z-20">
         <div className="max-w-5xl mx-auto text-center space-y-6">
