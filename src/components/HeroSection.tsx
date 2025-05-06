@@ -27,18 +27,25 @@ const HeroSection = () => {
   return (
     <section 
       id="home" 
-      className="relative h-screen w-full flex items-center justify-center overflow-hidden"
+      className="relative h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Video Background with full coverage and dark tint overlay */}
       <div className="absolute inset-0 w-full h-full">
         {/* Black tint overlay */}
         <div className="absolute inset-0 bg-black/65 z-10" />
-        <iframe
-          src="https://www.youtube.com/embed/dq2bBjBMUNI?autoplay=1&mute=1&controls=0&loop=1&playlist=dq2bBjBMUNI&playsinline=1"
-          className="absolute w-[100vw] h-[100vh] object-cover"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          style={{ pointerEvents: 'none' }}
-        />
+        <div className="absolute top-0 left-0 w-screen h-screen overflow-hidden">
+          <iframe
+            src="https://www.youtube.com/embed/dq2bBjBMUNI?autoplay=1&mute=1&controls=0&loop=1&playlist=dq2bBjBMUNI&playsinline=1"
+            className="absolute top-50% left-50% min-w-[100vw] min-h-[100vh] w-auto h-auto object-cover scale-[1.01]"
+            style={{ 
+              transform: 'translate(-50%, -50%)',
+              top: '50%', 
+              left: '50%',
+              pointerEvents: 'none'
+            }}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          />
+        </div>
       </div>
       
       <div className="container mx-auto px-4 relative z-20">
