@@ -2,9 +2,12 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
+import { Music, MusicOff } from "lucide-react";
 
 const HeroSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+  const [videoRef, setVideoRef] = useState<HTMLIFrameElement | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -24,6 +27,20 @@ const HeroSection = () => {
     }
   };
 
+  const toggleMusic = () => {
+    setIsMusicPlaying(!isMusicPlaying);
+    
+    // Use postMessage to control YouTube iframe
+    if (videoRef) {
+      const command = isMusicPlaying ? 'mute' : 'unMute';
+      videoRef.contentWindow?.postMessage(JSON.stringify({
+        event: 'command',
+        func: command,
+        args: []
+      }), '*');
+    }
+  };
+
   return (
     <section 
       id="home" 
@@ -38,14 +55,15 @@ const HeroSection = () => {
         {/* Video container with enhanced positioning */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <iframe
-            src="https://www.youtube.com/embed/dq2bBjBMUNI?autoplay=1&mute=1&controls=0&loop=1&playlist=dq2bBjBMUNI&playsinline=1&showinfo=0&rel=0&modestbranding=1"
+            ref={setVideoRef}
+            src="https://www.youtube.com/embed/dq2bBjBMUNI?autoplay=1&mute=1&controls=0&loop=1&playlist=dq2bBjBMUNI&playsinline=1&showinfo=0&rel=0&modestbranding=1&enablejsapi=1"
             style={{ 
               position: 'absolute',
               top: '50%',
               left: '50%',
-              width: '120vw', /* Increased from 100vw to 120vw */
-              height: '120vh', /* Increased from 100vh to 120vh */
-              transform: 'translate(-50%, -50%) scale(1.2)', /* Increased scale from 1.05 to 1.2 */
+              width: '140vw', /* Increased from 120vw to 140vw for full coverage */
+              height: '140vh', /* Increased from 120vh to 140vh for full coverage */
+              transform: 'translate(-50%, -50%) scale(1.5)', /* Increased scale from 1.2 to 1.5 */
               pointerEvents: 'none',
               border: 'none',
               objectFit: 'cover'
@@ -90,9 +108,20 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Music control button */}
+      <button 
+        onClick={toggleMusic}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 p-3 rounded-full bg-black/30 backdrop-blur-sm hover:bg-black/40 transition-all duration-300"
+        aria-label={isMusicPlaying ? "Turn music off" : "Turn music on"}
+      >
+        {isMusicPlaying ? 
+          <Music className="w-6 h-6 text-deenga-yellow" /> : 
+          <MusicOff className="w-6 h-6 text-deenga-yellow" />
+        }
+      </button>
     </section>
   );
 };
 
 export default HeroSection;
-

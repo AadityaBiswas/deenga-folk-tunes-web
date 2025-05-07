@@ -12,8 +12,10 @@ import { cn } from "@/lib/utils";
 const Index = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [glowSize, setGlowSize] = useState(18); // Even smaller starting size
+  const [glowSize, setGlowSize] = useState(18);
   const [glowOpacity, setGlowOpacity] = useState(0.5);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+  const [visualizerValues, setVisualizerValues] = useState<number[]>(Array(8).fill(5));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +24,20 @@ const Index = () => {
 
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    // Listen for music state changes
+    const handleMessage = (event: MessageEvent) => {
+      try {
+        if (typeof event.data === 'string') {
+          const data = JSON.parse(event.data);
+          if (data.type === 'musicStateChange') {
+            setIsMusicPlaying(data.playing);
+          }
+        }
+      } catch (e) {
+        // Silently ignore parsing errors
+      }
     };
 
     // Create an ultra-smooth and more prominent pulsating animation effect for the glow
@@ -35,15 +51,38 @@ const Index = () => {
         // Ultra-smooth opacity pulsation
         return 0.5 + Math.sin(Date.now() / 300) * 0.3;
       });
+
+      // If music is playing, animate the visualizer
+      if (isMusicPlaying) {
+        setVisualizerValues(prev => prev.map(() => {
+          // Generate random values that simulate audio visualization
+          return 5 + Math.random() * 10;
+        }));
+      }
     }, 5); // Update at 200fps for extremely smooth animation
 
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', updateMousePosition);
+    window.addEventListener('message', handleMessage);
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', updateMousePosition);
+      window.removeEventListener('message', handleMessage);
       clearInterval(pulseInterval);
+    };
+  }, [isMusicPlaying]);
+
+  // Listen for music toggle from HeroSection
+  useEffect(() => {
+    const handleMusicToggle = (event: CustomEvent) => {
+      setIsMusicPlaying(event.detail.playing);
+    };
+    
+    window.addEventListener('musicToggled' as any, handleMusicToggle);
+    
+    return () => {
+      window.removeEventListener('musicToggled' as any, handleMusicToggle);
     };
   }, []);
 
@@ -65,13 +104,37 @@ const Index = () => {
           transform: `translate(${mousePosition.x - glowSize/2}px, ${mousePosition.y - glowSize/2}px)`,
           opacity: glowOpacity,
           borderRadius: '50%',
-          background: 'rgba(250, 204, 21, 0.12)',
-          boxShadow: `0 0 28px 16px rgba(250, 204, 21, 0.35)`,
+          background: isMusicPlaying 
+            ? 'transparent' 
+            : 'rgba(250, 204, 21, 0.12)',
+          boxShadow: isMusicPlaying 
+            ? `0 0 28px 16px rgba(250, 204, 21, ${glowOpacity})` 
+            : `0 0 28px 16px rgba(250, 204, 21, 0.35)`,
           filter: 'blur(3px)',
           willChange: 'transform, opacity, width, height',
-          transition: 'transform 0.005s linear, width 0.05s ease-out, height 0.05s ease-out, opacity 0.05s ease-out',
+          transition: 'transform 0.005s linear, width 0.05s ease-out, height 0.05s ease-out, opacity 0.05s ease-out, background 0.3s ease',
         }}
       />
+      
+      {/* Audio visualizer concentric rings (only visible when music is playing) */}
+      {isMusicPlaying && visualizerValues.map((value, index) => (
+        <div
+          key={index}
+          className="fixed pointer-events-none z-50"
+          style={{
+            width: `${glowSize + value * (index + 1)}px`,
+            height: `${glowSize + value * (index + 1)}px`,
+            transform: `translate(${mousePosition.x - (glowSize + value * (index + 1))/2}px, ${mousePosition.y - (glowSize + value * (index + 1))/2}px)`,
+            opacity: 0.1 + (0.5 / (index + 1)),
+            borderRadius: '50%',
+            border: `1px solid rgba(250, 204, 21, ${0.3 / (index + 1)})`,
+            background: 'transparent',
+            boxShadow: `0 0 ${5 + index * 2}px ${2 + index}px rgba(250, 204, 21, ${0.15 / (index + 1)})`,
+            willChange: 'transform, width, height',
+            transition: 'transform 0.005s linear, width 0.05s ease-out, height 0.05s ease-out',
+          }}
+        />
+      ))}
 
       {/* Scroll to top button */}
       <button
@@ -99,4 +162,3 @@ const Index = () => {
 };
 
 export default Index;
-
