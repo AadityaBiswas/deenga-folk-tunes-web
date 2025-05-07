@@ -124,26 +124,26 @@ const Index = () => {
           key={index}
           className="fixed pointer-events-none z-50"
           style={{
-            width: `${glowSize + value * (index + 1) * 1.3}px`, // Increased scaling factor
-            height: `${glowSize + value * (index + 1) * 1.3}px`, // Increased scaling factor
-            transform: `translate(${mousePosition.x - (glowSize + value * (index + 1) * 1.3)/2}px, ${mousePosition.y - (glowSize + value * (index + 1) * 1.3)/2}px)`,
-            opacity: 0.2 + (0.7 / (index + 2)), // Higher opacity for more prominence
+            width: `${glowSize + value * (index + 1) * 1.5}px`, // Increased scaling factor for more prominence
+            height: `${glowSize + value * (index + 1) * 1.5}px`, // Increased scaling factor for more prominence
+            transform: `translate(${mousePosition.x - (glowSize + value * (index + 1) * 1.5)/2}px, ${mousePosition.y - (glowSize + value * (index + 1) * 1.5)/2}px)`,
+            opacity: 0.3 + (0.8 / (index + 2)), // Higher opacity for more prominence
             borderRadius: '50%',
-            border: `1.5px solid rgba(250, 204, 21, ${0.6 / (index + 1)})`, // Thicker, brighter border
+            border: `2px solid rgba(250, 204, 21, ${0.7 / (index + 1)})`, // Thicker, brighter border
             background: 'transparent',
-            boxShadow: `0 0 ${8 + index * 4}px ${5 + index * 2}px rgba(250, 204, 21, ${0.3 / (index + 1)})`, // Enhanced glow
+            boxShadow: `0 0 ${10 + index * 6}px ${8 + index * 3}px rgba(250, 204, 21, ${0.4 / (index + 1)})`, // Enhanced glow
             willChange: 'transform, width, height',
             transition: 'transform 0.005s linear, width 0.1s ease-out, height 0.1s ease-out', // Smoother transitions
           }}
         />
       ))}
 
-      {/* Scroll to top button */}
+      {/* Scroll to top button - visible only when NOT playing music */}
       <button
         onClick={scrollToTop}
         className={cn(
           "fixed bottom-8 right-8 p-3 rounded-full bg-deenga-yellow/80 text-black z-50 shadow-lg hover:bg-deenga-yellow transition-all duration-300 transform",
-          showScrollTop ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
+          showScrollTop && !isMusicPlaying ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
         )}
         aria-label="Scroll to top"
       >

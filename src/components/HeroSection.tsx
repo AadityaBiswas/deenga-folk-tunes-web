@@ -67,7 +67,7 @@ const HeroSection = () => {
       className="relative h-screen flex items-center justify-center overflow-hidden"
       style={{ width: '100vw', margin: 0, padding: 0 }}
     >
-      {/* Video Background with reduced size */}
+      {/* Video Background with full section coverage */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         {/* Black tint overlay with fade-out animation when music is playing */}
         <div className={cn(
@@ -75,7 +75,7 @@ const HeroSection = () => {
           !contentVisible && "opacity-0"
         )} />
         
-        {/* Video container with reduced sizing */}
+        {/* Video container sized to fit the entire section */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <iframe
             ref={setVideoRef}
@@ -84,9 +84,9 @@ const HeroSection = () => {
               position: 'absolute',
               top: '50%',
               left: '50%',
-              width: '150vw', /* Reduced from 180vw to 150vw */
-              height: '150vh', /* Reduced from 180vh to 150vh */
-              transform: 'translate(-50%, -50%) scale(1.2)', /* Reduced scale from 1.6 to 1.2 */
+              width: '100vw',
+              height: '100vh',
+              transform: 'translate(-50%, -50%)',
               pointerEvents: 'none',
               border: 'none',
               objectFit: 'cover'
@@ -138,17 +138,17 @@ const HeroSection = () => {
       {/* Music control button with improved styling and animations */}
       <button 
         onClick={toggleMusic}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 p-4 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-500 border border-white/10 shadow-lg"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 p-4 rounded-full bg-transparent hover:bg-white/10 transition-all duration-500 border border-white/10"
         aria-label={isMusicPlaying ? "Turn music off" : "Turn music on"}
       >
         <div className="relative">
           {/* Enhanced visualizer rings (only visible when music is playing) */}
           {isMusicPlaying && (
             <>
-              <div className="absolute inset-0 -m-3 rounded-full animate-pulse-slow bg-transparent border border-deenga-yellow/50"></div>
-              <div className="absolute inset-0 -m-6 rounded-full animate-pulse-slow animation-delay-300 bg-transparent border border-deenga-yellow/40"></div>
-              <div className="absolute inset-0 -m-10 rounded-full animate-pulse-slow animation-delay-600 bg-transparent border border-deenga-yellow/30"></div>
-              <div className="absolute inset-0 -m-14 rounded-full animate-pulse-slow animation-delay-900 bg-transparent border border-deenga-yellow/20"></div>
+              <div className="absolute inset-0 -m-3 rounded-full animate-pulse-slow bg-transparent border border-deenga-yellow/70"></div>
+              <div className="absolute inset-0 -m-6 rounded-full animate-pulse-slow animation-delay-300 bg-transparent border border-deenga-yellow/60"></div>
+              <div className="absolute inset-0 -m-10 rounded-full animate-pulse-slow animation-delay-600 bg-transparent border border-deenga-yellow/50"></div>
+              <div className="absolute inset-0 -m-14 rounded-full animate-pulse-slow animation-delay-900 bg-transparent border border-deenga-yellow/40"></div>
             </>
           )}
           
