@@ -56,8 +56,8 @@ const Index = () => {
       if (isMusicPlaying) {
         setVisualizerValues(prev => prev.map((_, i) => {
           // Generate more dynamic random values that simulate audio visualization
-          const baseFrequency = 8 + Math.random() * 20; // Increased range for more visual impact
-          const pulseOffset = Math.sin(Date.now() / (200 + i * 40)) * 5; // More prominent timing for each ring
+          const baseFrequency = 12 + Math.random() * 25; // Increased range for more visual impact
+          const pulseOffset = Math.sin(Date.now() / (200 + i * 40)) * 8; // More prominent timing for each ring
           return baseFrequency + pulseOffset;
         }));
       }
@@ -97,7 +97,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Ultra-smooth cursor glow effect with more natural look */}
+      {/* Ultra-smooth cursor glow effect - fixed for proper display */}
       <div
         className="fixed pointer-events-none z-50"
         style={{
@@ -106,11 +106,9 @@ const Index = () => {
           transform: `translate(${mousePosition.x - glowSize/2}px, ${mousePosition.y - glowSize/2}px)`,
           opacity: glowOpacity,
           borderRadius: '50%',
-          background: isMusicPlaying 
-            ? 'transparent' 
-            : 'rgba(250, 204, 21, 0.12)',
+          background: 'transparent',
           boxShadow: isMusicPlaying 
-            ? `0 0 28px 16px rgba(250, 204, 21, ${glowOpacity})` 
+            ? `0 0 30px 20px rgba(255, 255, 255, ${glowOpacity})` 
             : `0 0 28px 16px rgba(250, 204, 21, 0.35)`,
           filter: 'blur(3px)',
           willChange: 'transform, opacity, width, height',
@@ -118,20 +116,20 @@ const Index = () => {
         }}
       />
       
-      {/* Enhanced audio visualizer concentric rings with more prominent appearance */}
+      {/* Enhanced audio visualizer concentric rings - more prominent with thicker borders and brighter colors */}
       {isMusicPlaying && visualizerValues.map((value, index) => (
         <div
           key={index}
           className="fixed pointer-events-none z-50"
           style={{
-            width: `${glowSize + value * (index + 1) * 1.5}px`, // Increased scaling factor for more prominence
-            height: `${glowSize + value * (index + 1) * 1.5}px`, // Increased scaling factor for more prominence
-            transform: `translate(${mousePosition.x - (glowSize + value * (index + 1) * 1.5)/2}px, ${mousePosition.y - (glowSize + value * (index + 1) * 1.5)/2}px)`,
-            opacity: 0.3 + (0.8 / (index + 2)), // Higher opacity for more prominence
+            width: `${glowSize + value * (index + 1) * 1.8}px`, // Increased scaling factor
+            height: `${glowSize + value * (index + 1) * 1.8}px`, // Increased scaling factor
+            transform: `translate(${mousePosition.x - (glowSize + value * (index + 1) * 1.8)/2}px, ${mousePosition.y - (glowSize + value * (index + 1) * 1.8)/2}px)`,
+            opacity: 0.4 + (0.9 / (index + 2)), // Higher opacity
             borderRadius: '50%',
-            border: `2px solid rgba(250, 204, 21, ${0.7 / (index + 1)})`, // Thicker, brighter border
+            border: `3px solid rgba(255, 255, 255, ${0.8 / (index + 1)})`, // Thicker border and brighter
             background: 'transparent',
-            boxShadow: `0 0 ${10 + index * 6}px ${8 + index * 3}px rgba(250, 204, 21, ${0.4 / (index + 1)})`, // Enhanced glow
+            boxShadow: `0 0 ${12 + index * 8}px ${10 + index * 4}px rgba(255, 255, 255, ${0.5 / (index + 1)})`, // Enhanced glow
             willChange: 'transform, width, height',
             transition: 'transform 0.005s linear, width 0.1s ease-out, height 0.1s ease-out', // Smoother transitions
           }}

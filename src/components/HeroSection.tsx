@@ -35,12 +35,17 @@ const HeroSection = () => {
     // Start icon transition animation
     setIconTransition(true);
     
-    // Toggle content visibility with music
-    setContentVisible(!isMusicPlaying);
+    const newMusicState = !isMusicPlaying;
+    
+    // Only hide content when turning music ON (clicking the mute icon)
+    if (!isMusicPlaying) {
+      setContentVisible(false);
+    } else {
+      setContentVisible(true);
+    }
     
     // Delay the actual music toggle to allow for animation
     setTimeout(() => {
-      const newMusicState = !isMusicPlaying;
       setIsMusicPlaying(newMusicState);
       
       // Use postMessage to control YouTube iframe
@@ -135,20 +140,20 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Music control button with improved styling and animations */}
+      {/* Music control button - now fully transparent with white color */}
       <button 
         onClick={toggleMusic}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 p-4 rounded-full bg-transparent hover:bg-white/10 transition-all duration-500 border border-white/10"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 p-4 rounded-full bg-transparent hover:bg-white/10 transition-all duration-500 border border-white/20"
         aria-label={isMusicPlaying ? "Turn music off" : "Turn music on"}
       >
         <div className="relative">
-          {/* Enhanced visualizer rings (only visible when music is playing) */}
+          {/* Enhanced visualizer rings (only visible when music is playing) - made more prominent */}
           {isMusicPlaying && (
             <>
-              <div className="absolute inset-0 -m-3 rounded-full animate-pulse-slow bg-transparent border border-deenga-yellow/70"></div>
-              <div className="absolute inset-0 -m-6 rounded-full animate-pulse-slow animation-delay-300 bg-transparent border border-deenga-yellow/60"></div>
-              <div className="absolute inset-0 -m-10 rounded-full animate-pulse-slow animation-delay-600 bg-transparent border border-deenga-yellow/50"></div>
-              <div className="absolute inset-0 -m-14 rounded-full animate-pulse-slow animation-delay-900 bg-transparent border border-deenga-yellow/40"></div>
+              <div className="absolute inset-0 -m-3 rounded-full animate-pulse-slow bg-transparent border-2 border-white/90"></div>
+              <div className="absolute inset-0 -m-6 rounded-full animate-pulse-slow animation-delay-300 bg-transparent border-2 border-white/80"></div>
+              <div className="absolute inset-0 -m-10 rounded-full animate-pulse-slow animation-delay-600 bg-transparent border-2 border-white/70"></div>
+              <div className="absolute inset-0 -m-14 rounded-full animate-pulse-slow animation-delay-900 bg-transparent border-2 border-white/60"></div>
             </>
           )}
           

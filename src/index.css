@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -93,7 +92,7 @@
 
   html {
     @apply bg-black;
-    cursor: none !important;
+    cursor: none;
   }
 
   body {
@@ -101,7 +100,7 @@
     /* Remove scrollbars for the entire body */
     scrollbar-width: none;
     -ms-overflow-style: none;
-    cursor: none !important;
+    cursor: none;
   }
 
   /* Hide all scrollbars */
@@ -132,12 +131,12 @@
   
   /* Custom cursor styles - hiding all cursors */
   * {
-    cursor: none !important;
+    cursor: none;
   }
 
   /* Remove cursor from buttons and links */
   a, button, [role="button"], input, textarea, select {
-    cursor: none !important;
+    cursor: none;
   }
 }
 
