@@ -4,11 +4,13 @@ import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import { Music, VolumeX } from "lucide-react";
 import { dispatchMusicToggleEvent } from "../utils/eventBus";
+import { Button } from "./ui/button";
 
 const HeroSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const [videoRef, setVideoRef] = useState<HTMLIFrameElement | null>(null);
+  const [iconTransition, setIconTransition] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,21 +31,30 @@ const HeroSection = () => {
   };
 
   const toggleMusic = () => {
-    const newMusicState = !isMusicPlaying;
-    setIsMusicPlaying(newMusicState);
+    // Start icon transition animation
+    setIconTransition(true);
     
-    // Use postMessage to control YouTube iframe
-    if (videoRef) {
-      const command = isMusicPlaying ? 'mute' : 'unMute';
-      videoRef.contentWindow?.postMessage(JSON.stringify({
-        event: 'command',
-        func: command,
-        args: []
-      }), '*');
-    }
-    
-    // Dispatch event to notify other components
-    dispatchMusicToggleEvent(newMusicState);
+    // Delay the actual music toggle to allow for animation
+    setTimeout(() => {
+      const newMusicState = !isMusicPlaying;
+      setIsMusicPlaying(newMusicState);
+      
+      // Use postMessage to control YouTube iframe
+      if (videoRef) {
+        const command = isMusicPlaying ? 'mute' : 'unMute';
+        videoRef.contentWindow?.postMessage(JSON.stringify({
+          event: 'command',
+          func: command,
+          args: []
+        }), '*');
+      }
+      
+      // Dispatch event to notify other components
+      dispatchMusicToggleEvent(newMusicState);
+      
+      // Reset transition state
+      setTimeout(() => setIconTransition(false), 300);
+    }, 300);
   };
 
   return (
@@ -66,9 +77,9 @@ const HeroSection = () => {
               position: 'absolute',
               top: '50%',
               left: '50%',
-              width: '140vw', /* Increased from 120vw to 140vw for full coverage */
-              height: '140vh', /* Increased from 120vh to 140vh for full coverage */
-              transform: 'translate(-50%, -50%) scale(1.5)', /* Increased scale from 1.2 to 1.5 */
+              width: '180vw', /* Increased from 140vw to 180vw for fuller coverage */
+              height: '180vh', /* Increased from 140vh to 180vh for fuller coverage */
+              transform: 'translate(-50%, -50%) scale(1.6)', /* Increased scale from 1.5 to 1.6 */
               pointerEvents: 'none',
               border: 'none',
               objectFit: 'cover'
@@ -114,16 +125,31 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Music control button */}
+      {/* Music control button with improved styling and animations */}
       <button 
         onClick={toggleMusic}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 p-3 rounded-full bg-black/30 backdrop-blur-sm hover:bg-black/40 transition-all duration-300"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 p-4 rounded-full bg-white/20 backdrop-blur-lg hover:bg-white/30 transition-all duration-500 border border-white/10 shadow-lg"
         aria-label={isMusicPlaying ? "Turn music off" : "Turn music on"}
       >
-        {isMusicPlaying ? 
-          <Music className="w-6 h-6 text-deenga-yellow" /> : 
-          <VolumeX className="w-6 h-6 text-deenga-yellow" />
-        }
+        <div className="relative">
+          {/* Animated visualizer rings (only visible when music is playing) */}
+          {isMusicPlaying && (
+            <>
+              <div className="absolute inset-0 -m-3 rounded-full animate-pulse-slow bg-transparent border border-deenga-yellow/30"></div>
+              <div className="absolute inset-0 -m-5 rounded-full animate-pulse-slow animation-delay-300 bg-transparent border border-deenga-yellow/20"></div>
+              <div className="absolute inset-0 -m-7 rounded-full animate-pulse-slow animation-delay-600 bg-transparent border border-deenga-yellow/10"></div>
+            </>
+          )}
+          
+          {/* Icon container with transition animation */}
+          <div className={`relative transition-transform duration-500 ${iconTransition ? 'scale-0' : 'scale-100'}`}>
+            {isMusicPlaying ? (
+              <Music className="w-6 h-6 text-white transition-all duration-300" />
+            ) : (
+              <VolumeX className="w-6 h-6 text-white transition-all duration-300" />
+            )}
+          </div>
+        </div>
       </button>
     </section>
   );

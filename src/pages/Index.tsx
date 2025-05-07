@@ -52,11 +52,13 @@ const Index = () => {
         return 0.5 + Math.sin(Date.now() / 300) * 0.3;
       });
 
-      // If music is playing, animate the visualizer
+      // If music is playing, animate the visualizer with more dynamic values
       if (isMusicPlaying) {
-        setVisualizerValues(prev => prev.map(() => {
-          // Generate random values that simulate audio visualization
-          return 5 + Math.random() * 10;
+        setVisualizerValues(prev => prev.map((_, i) => {
+          // Generate more dynamic random values that simulate audio visualization
+          const baseFrequency = 5 + Math.random() * 15; // Increased range for more visual impact
+          const pulseOffset = Math.sin(Date.now() / (300 + i * 50)) * 3; // Varied timing for each ring
+          return baseFrequency + pulseOffset;
         }));
       }
     }, 5); // Update at 200fps for extremely smooth animation
@@ -116,7 +118,7 @@ const Index = () => {
         }}
       />
       
-      {/* Audio visualizer concentric rings (only visible when music is playing) */}
+      {/* Enhanced audio visualizer concentric rings with smoother transitions */}
       {isMusicPlaying && visualizerValues.map((value, index) => (
         <div
           key={index}
@@ -125,13 +127,13 @@ const Index = () => {
             width: `${glowSize + value * (index + 1)}px`,
             height: `${glowSize + value * (index + 1)}px`,
             transform: `translate(${mousePosition.x - (glowSize + value * (index + 1))/2}px, ${mousePosition.y - (glowSize + value * (index + 1))/2}px)`,
-            opacity: 0.1 + (0.5 / (index + 1)),
+            opacity: 0.15 + (0.5 / (index + 2)), // Slightly higher opacity
             borderRadius: '50%',
-            border: `1px solid rgba(250, 204, 21, ${0.3 / (index + 1)})`,
+            border: `1px solid rgba(250, 204, 21, ${0.4 / (index + 1)})`, // Brighter border
             background: 'transparent',
-            boxShadow: `0 0 ${5 + index * 2}px ${2 + index}px rgba(250, 204, 21, ${0.15 / (index + 1)})`,
+            boxShadow: `0 0 ${5 + index * 3}px ${3 + index}px rgba(250, 204, 21, ${0.2 / (index + 1)})`, // Enhanced glow
             willChange: 'transform, width, height',
-            transition: 'transform 0.005s linear, width 0.05s ease-out, height 0.05s ease-out',
+            transition: 'transform 0.005s linear, width 0.1s ease-out, height 0.1s ease-out', // Smoother transitions
           }}
         />
       ))}

@@ -122,8 +122,12 @@ export default {
 					'50%': { transform: 'translateY(-10px)' },
 				},
 				pulse: {
-					'0%, 100%': { opacity: '1' },
-					'50%': { opacity: '0.5' },
+					'0%, 100%': { opacity: '1', transform: 'scale(1)' },
+					'50%': { opacity: '0.5', transform: 'scale(1.05)' },
+				},
+				pulseSlow: {
+					'0%, 100%': { opacity: '0.8', transform: 'scale(1)' },
+					'50%': { opacity: '0.2', transform: 'scale(1.1)' },
 				},
 				shimmer: {
 					'0%': { backgroundPosition: '-200% 0' },
@@ -136,7 +140,7 @@ export default {
 				'fade-in': 'fadeIn 0.5s ease-out',
 				'fade-in-slow': 'fadeInSlow 1.2s ease-out',
 				'float': 'float 6s ease-in-out infinite',
-				'pulse-slow': 'pulse 4s ease-in-out infinite',
+				'pulse-slow': 'pulseSlow 3s ease-in-out infinite',
 				'shimmer': 'shimmer 2s infinite linear',
 			}
 		}
