@@ -12,8 +12,8 @@ import { cn } from "@/lib/utils";
 const Index = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [glowSize, setGlowSize] = useState(20); // Smaller starting size
-  const [glowOpacity, setGlowOpacity] = useState(0.55);
+  const [glowSize, setGlowSize] = useState(18); // Even smaller starting size
+  const [glowOpacity, setGlowOpacity] = useState(0.5);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,14 +28,14 @@ const Index = () => {
     const pulseInterval = setInterval(() => {
       setGlowSize(prevSize => {
         // Ultra-smooth size pulsation
-        return 20 + Math.sin(Date.now() / 500) * 6;
+        return 18 + Math.sin(Date.now() / 400) * 7;
       });
       
       setGlowOpacity(prevOpacity => {
         // Ultra-smooth opacity pulsation
-        return 0.55 + Math.sin(Date.now() / 400) * 0.25;
+        return 0.5 + Math.sin(Date.now() / 300) * 0.3;
       });
-    }, 8); // Update at 125fps for extremely smooth animation
+    }, 5); // Update at 200fps for extremely smooth animation
 
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', updateMousePosition);
@@ -65,11 +65,11 @@ const Index = () => {
           transform: `translate(${mousePosition.x - glowSize/2}px, ${mousePosition.y - glowSize/2}px)`,
           opacity: glowOpacity,
           borderRadius: '50%',
-          background: 'rgba(250, 204, 21, 0.15)',
-          boxShadow: `0 0 24px 14px rgba(250, 204, 21, 0.4)`,
-          filter: 'blur(4px)',
+          background: 'rgba(250, 204, 21, 0.12)',
+          boxShadow: `0 0 28px 16px rgba(250, 204, 21, 0.35)`,
+          filter: 'blur(3px)',
           willChange: 'transform, opacity, width, height',
-          transition: 'transform 0.01s linear, width 0.08s ease-out, height 0.08s ease-out, opacity 0.08s ease-out',
+          transition: 'transform 0.005s linear, width 0.05s ease-out, height 0.05s ease-out, opacity 0.05s ease-out',
         }}
       />
 
@@ -99,3 +99,4 @@ const Index = () => {
 };
 
 export default Index;
+

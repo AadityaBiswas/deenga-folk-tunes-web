@@ -30,7 +30,7 @@ const HeroSection = () => {
       className="relative h-screen flex items-center justify-center overflow-hidden"
       style={{ width: '100vw', margin: 0, padding: 0 }}
     >
-      {/* Video Background with improved full coverage */}
+      {/* Video Background with maximum coverage */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         {/* Black tint overlay */}
         <div className="absolute inset-0 bg-black/65 z-10" />
@@ -39,16 +39,16 @@ const HeroSection = () => {
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <iframe
             src="https://www.youtube.com/embed/dq2bBjBMUNI?autoplay=1&mute=1&controls=0&loop=1&playlist=dq2bBjBMUNI&playsinline=1&showinfo=0&rel=0&modestbranding=1"
-            className="absolute w-[100vw] h-[100vh] object-cover"
             style={{ 
               position: 'absolute',
               top: '50%',
               left: '50%',
-              width: '100vw',
-              height: '100vh',
-              transform: 'translate(-50%, -50%) scale(1.05)', /* Slightly scaled to ensure coverage */
+              width: '120vw', /* Increased from 100vw to 120vw */
+              height: '120vh', /* Increased from 100vh to 120vh */
+              transform: 'translate(-50%, -50%) scale(1.2)', /* Increased scale from 1.05 to 1.2 */
               pointerEvents: 'none',
-              border: 'none' /* Remove iframe border */
+              border: 'none',
+              objectFit: 'cover'
             }}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             title="Background video"
@@ -95,3 +95,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
