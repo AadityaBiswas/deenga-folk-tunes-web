@@ -12,8 +12,8 @@ import { cn } from "@/lib/utils";
 const Index = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [glowSize, setGlowSize] = useState(24); // Starting with a smaller size
-  const [glowOpacity, setGlowOpacity] = useState(0.6);
+  const [glowSize, setGlowSize] = useState(20); // Smaller starting size
+  const [glowOpacity, setGlowOpacity] = useState(0.55);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,18 +24,18 @@ const Index = () => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    // Create a smoother and more prominent pulsating animation effect for the glow
+    // Create an ultra-smooth and more prominent pulsating animation effect for the glow
     const pulseInterval = setInterval(() => {
       setGlowSize(prevSize => {
         // Ultra-smooth size pulsation
-        return 24 + Math.sin(Date.now() / 600) * 5;
+        return 20 + Math.sin(Date.now() / 500) * 6;
       });
       
       setGlowOpacity(prevOpacity => {
         // Ultra-smooth opacity pulsation
-        return 0.6 + Math.sin(Date.now() / 500) * 0.2;
+        return 0.55 + Math.sin(Date.now() / 400) * 0.25;
       });
-    }, 10); // Update at 100fps for extremely smooth animation
+    }, 8); // Update at 125fps for extremely smooth animation
 
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', updateMousePosition);
@@ -55,8 +55,8 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen relative">
-      {/* Ultra-smooth cursor glow effect */}
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Ultra-smooth cursor glow effect with more natural look */}
       <div
         className="fixed pointer-events-none z-50"
         style={{
@@ -65,11 +65,11 @@ const Index = () => {
           transform: `translate(${mousePosition.x - glowSize/2}px, ${mousePosition.y - glowSize/2}px)`,
           opacity: glowOpacity,
           borderRadius: '50%',
-          background: 'rgba(250, 204, 21, 0.2)',
-          boxShadow: `0 0 22px 12px rgba(250, 204, 21, 0.45)`,
-          filter: 'blur(5px)',
+          background: 'rgba(250, 204, 21, 0.15)',
+          boxShadow: `0 0 24px 14px rgba(250, 204, 21, 0.4)`,
+          filter: 'blur(4px)',
           willChange: 'transform, opacity, width, height',
-          transition: 'transform 0.02s linear, width 0.1s ease-out, height 0.1s ease-out, opacity 0.1s ease-out',
+          transition: 'transform 0.01s linear, width 0.08s ease-out, height 0.08s ease-out, opacity 0.08s ease-out',
         }}
       />
 

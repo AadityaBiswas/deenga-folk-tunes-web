@@ -28,22 +28,31 @@ const HeroSection = () => {
     <section 
       id="home" 
       className="relative h-screen flex items-center justify-center overflow-hidden"
+      style={{ width: '100vw', margin: 0, padding: 0 }}
     >
-      {/* Video Background with full coverage and dark tint overlay */}
-      <div className="absolute inset-0 w-full h-full">
+      {/* Video Background with improved full coverage */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
         {/* Black tint overlay */}
         <div className="absolute inset-0 bg-black/65 z-10" />
-        <div className="absolute top-0 left-0 w-screen h-screen overflow-hidden">
+        
+        {/* Video container with enhanced positioning */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
           <iframe
-            src="https://www.youtube.com/embed/dq2bBjBMUNI?autoplay=1&mute=1&controls=0&loop=1&playlist=dq2bBjBMUNI&playsinline=1"
-            className="absolute top-50% left-50% min-w-[100vw] min-h-[100vh] w-auto h-auto object-cover scale-[1.01]"
+            src="https://www.youtube.com/embed/dq2bBjBMUNI?autoplay=1&mute=1&controls=0&loop=1&playlist=dq2bBjBMUNI&playsinline=1&showinfo=0&rel=0&modestbranding=1"
+            className="absolute w-[100vw] h-[100vh] object-cover"
             style={{ 
-              transform: 'translate(-50%, -50%)',
-              top: '50%', 
+              position: 'absolute',
+              top: '50%',
               left: '50%',
-              pointerEvents: 'none'
+              width: '100vw',
+              height: '100vh',
+              transform: 'translate(-50%, -50%) scale(1.05)', /* Slightly scaled to ensure coverage */
+              pointerEvents: 'none',
+              border: 'none' /* Remove iframe border */
             }}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            title="Background video"
+            frameBorder="0"
           />
         </div>
       </div>
