@@ -97,7 +97,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Ultra-smooth cursor glow effect - fixed for proper display */}
+      {/* Fixed cursor glow effect - always yellow regardless of music state */}
       <div
         className="fixed pointer-events-none z-50"
         style={{
@@ -107,29 +107,27 @@ const Index = () => {
           opacity: glowOpacity,
           borderRadius: '50%',
           background: 'transparent',
-          boxShadow: isMusicPlaying 
-            ? `0 0 30px 20px rgba(255, 255, 255, ${glowOpacity})` 
-            : `0 0 28px 16px rgba(250, 204, 21, 0.35)`,
+          boxShadow: `0 0 30px 20px rgba(250, 204, 21, 0.45)`, // Always yellow glow
           filter: 'blur(3px)',
           willChange: 'transform, opacity, width, height',
-          transition: 'transform 0.005s linear, width 0.05s ease-out, height 0.05s ease-out, opacity 0.05s ease-out, background 0.3s ease',
+          transition: 'transform 0.005s linear, width 0.05s ease-out, height 0.05s ease-out, opacity 0.05s ease-out',
         }}
       />
       
-      {/* Enhanced audio visualizer concentric rings - more prominent with thicker borders and brighter colors */}
+      {/* Enhanced audio visualizer concentric rings - more prominent with thicker borders */}
       {isMusicPlaying && visualizerValues.map((value, index) => (
         <div
           key={index}
           className="fixed pointer-events-none z-50"
           style={{
-            width: `${glowSize + value * (index + 1) * 1.8}px`, // Increased scaling factor
-            height: `${glowSize + value * (index + 1) * 1.8}px`, // Increased scaling factor
-            transform: `translate(${mousePosition.x - (glowSize + value * (index + 1) * 1.8)/2}px, ${mousePosition.y - (glowSize + value * (index + 1) * 1.8)/2}px)`,
-            opacity: 0.4 + (0.9 / (index + 2)), // Higher opacity
+            width: `${glowSize + value * (index + 1) * 2}px`,
+            height: `${glowSize + value * (index + 1) * 2}px`,
+            transform: `translate(${mousePosition.x - (glowSize + value * (index + 1) * 2)/2}px, ${mousePosition.y - (glowSize + value * (index + 1) * 2)/2}px)`,
+            opacity: 0.5 + (0.9 / (index + 2)), // Higher opacity
             borderRadius: '50%',
-            border: `3px solid rgba(255, 255, 255, ${0.8 / (index + 1)})`, // Thicker border and brighter
+            border: `3px solid rgba(250, 204, 21, ${0.8 / (index + 1)})`, // Yellow border
             background: 'transparent',
-            boxShadow: `0 0 ${12 + index * 8}px ${10 + index * 4}px rgba(255, 255, 255, ${0.5 / (index + 1)})`, // Enhanced glow
+            boxShadow: `0 0 ${15 + index * 10}px ${12 + index * 5}px rgba(250, 204, 21, ${0.5 / (index + 1)})`, // Enhanced yellow glow
             willChange: 'transform, width, height',
             transition: 'transform 0.005s linear, width 0.1s ease-out, height 0.1s ease-out', // Smoother transitions
           }}
