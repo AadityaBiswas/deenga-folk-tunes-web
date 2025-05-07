@@ -75,7 +75,7 @@ const Index = () => {
 
   // Listen for music toggle from HeroSection
   useEffect(() => {
-    const handleMusicToggle = (event: CustomEvent) => {
+    const handleMusicToggle = (event: CustomEvent<{playing: boolean}>) => {
       setIsMusicPlaying(event.detail.playing);
     };
     

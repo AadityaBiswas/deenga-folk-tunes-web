@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
-import { Music, MusicOff } from "lucide-react";
+import { Music, VolumeX } from "lucide-react";
+import { dispatchMusicToggleEvent } from "../utils/eventBus";
 
 const HeroSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -28,7 +29,8 @@ const HeroSection = () => {
   };
 
   const toggleMusic = () => {
-    setIsMusicPlaying(!isMusicPlaying);
+    const newMusicState = !isMusicPlaying;
+    setIsMusicPlaying(newMusicState);
     
     // Use postMessage to control YouTube iframe
     if (videoRef) {
@@ -39,6 +41,9 @@ const HeroSection = () => {
         args: []
       }), '*');
     }
+    
+    // Dispatch event to notify other components
+    dispatchMusicToggleEvent(newMusicState);
   };
 
   return (
@@ -117,7 +122,7 @@ const HeroSection = () => {
       >
         {isMusicPlaying ? 
           <Music className="w-6 h-6 text-deenga-yellow" /> : 
-          <MusicOff className="w-6 h-6 text-deenga-yellow" />
+          <VolumeX className="w-6 h-6 text-deenga-yellow" />
         }
       </button>
     </section>
