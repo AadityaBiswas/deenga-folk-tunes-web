@@ -11,6 +11,7 @@ const HeroSection = () => {
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const [videoRef, setVideoRef] = useState<HTMLIFrameElement | null>(null);
   const [iconTransition, setIconTransition] = useState(false);
+  const [contentVisible, setContentVisible] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -33,6 +34,9 @@ const HeroSection = () => {
   const toggleMusic = () => {
     // Start icon transition animation
     setIconTransition(true);
+    
+    // Toggle content visibility with music
+    setContentVisible(!isMusicPlaying);
     
     // Delay the actual music toggle to allow for animation
     setTimeout(() => {
@@ -63,12 +67,15 @@ const HeroSection = () => {
       className="relative h-screen flex items-center justify-center overflow-hidden"
       style={{ width: '100vw', margin: 0, padding: 0 }}
     >
-      {/* Video Background with maximum coverage */}
+      {/* Video Background with reduced size */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        {/* Black tint overlay */}
-        <div className="absolute inset-0 bg-black/65 z-10" />
+        {/* Black tint overlay with fade-out animation when music is playing */}
+        <div className={cn(
+          "absolute inset-0 bg-black/65 z-10 transition-opacity duration-1000",
+          !contentVisible && "opacity-0"
+        )} />
         
-        {/* Video container with enhanced positioning */}
+        {/* Video container with reduced sizing */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <iframe
             ref={setVideoRef}
@@ -77,9 +84,9 @@ const HeroSection = () => {
               position: 'absolute',
               top: '50%',
               left: '50%',
-              width: '180vw', /* Increased from 140vw to 180vw for fuller coverage */
-              height: '180vh', /* Increased from 140vh to 180vh for fuller coverage */
-              transform: 'translate(-50%, -50%) scale(1.6)', /* Increased scale from 1.5 to 1.6 */
+              width: '150vw', /* Reduced from 180vw to 150vw */
+              height: '150vh', /* Reduced from 180vh to 150vh */
+              transform: 'translate(-50%, -50%) scale(1.2)', /* Reduced scale from 1.6 to 1.2 */
               pointerEvents: 'none',
               border: 'none',
               objectFit: 'cover'
@@ -91,7 +98,10 @@ const HeroSection = () => {
         </div>
       </div>
       
-      <div className="container mx-auto px-4 relative z-20">
+      <div className={cn(
+        "container mx-auto px-4 relative z-20 transition-opacity duration-1000",
+        !contentVisible && "opacity-0 pointer-events-none"
+      )}>
         <div className="max-w-5xl mx-auto text-center space-y-6">
           <h1 className={cn(
             "text-4xl md:text-5xl lg:text-6xl font-serif font-bold bg-gradient-to-r from-white via-white/90 to-deenga-yellow/80 bg-clip-text text-transparent transition-all duration-1000 opacity-0 scale-95",
@@ -114,7 +124,7 @@ const HeroSection = () => {
             <a 
               href="#music" 
               onClick={handleScrollToMusic}
-              className="group relative px-5 py-2 bg-white/10 backdrop-blur-sm text-xs sm:text-sm rounded-full overflow-hidden hover:bg-white/20 transition-all duration-500"
+              className="group relative px-5 py-2 bg-transparent text-xs sm:text-sm rounded-full overflow-hidden hover:bg-white/10 transition-all duration-500"
             >
               <span className="relative z-10 flex items-center gap-1 text-white">
                 Listen Now
@@ -128,16 +138,17 @@ const HeroSection = () => {
       {/* Music control button with improved styling and animations */}
       <button 
         onClick={toggleMusic}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 p-4 rounded-full bg-white/20 backdrop-blur-lg hover:bg-white/30 transition-all duration-500 border border-white/10 shadow-lg"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 p-4 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-500 border border-white/10 shadow-lg"
         aria-label={isMusicPlaying ? "Turn music off" : "Turn music on"}
       >
         <div className="relative">
-          {/* Animated visualizer rings (only visible when music is playing) */}
+          {/* Enhanced visualizer rings (only visible when music is playing) */}
           {isMusicPlaying && (
             <>
-              <div className="absolute inset-0 -m-3 rounded-full animate-pulse-slow bg-transparent border border-deenga-yellow/30"></div>
-              <div className="absolute inset-0 -m-5 rounded-full animate-pulse-slow animation-delay-300 bg-transparent border border-deenga-yellow/20"></div>
-              <div className="absolute inset-0 -m-7 rounded-full animate-pulse-slow animation-delay-600 bg-transparent border border-deenga-yellow/10"></div>
+              <div className="absolute inset-0 -m-3 rounded-full animate-pulse-slow bg-transparent border border-deenga-yellow/50"></div>
+              <div className="absolute inset-0 -m-6 rounded-full animate-pulse-slow animation-delay-300 bg-transparent border border-deenga-yellow/40"></div>
+              <div className="absolute inset-0 -m-10 rounded-full animate-pulse-slow animation-delay-600 bg-transparent border border-deenga-yellow/30"></div>
+              <div className="absolute inset-0 -m-14 rounded-full animate-pulse-slow animation-delay-900 bg-transparent border border-deenga-yellow/20"></div>
             </>
           )}
           

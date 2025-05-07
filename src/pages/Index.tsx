@@ -15,7 +15,7 @@ const Index = () => {
   const [glowSize, setGlowSize] = useState(18);
   const [glowOpacity, setGlowOpacity] = useState(0.5);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
-  const [visualizerValues, setVisualizerValues] = useState<number[]>(Array(8).fill(5));
+  const [visualizerValues, setVisualizerValues] = useState<number[]>(Array(10).fill(5)); // Increased array size for more rings
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,8 +56,8 @@ const Index = () => {
       if (isMusicPlaying) {
         setVisualizerValues(prev => prev.map((_, i) => {
           // Generate more dynamic random values that simulate audio visualization
-          const baseFrequency = 5 + Math.random() * 15; // Increased range for more visual impact
-          const pulseOffset = Math.sin(Date.now() / (300 + i * 50)) * 3; // Varied timing for each ring
+          const baseFrequency = 8 + Math.random() * 20; // Increased range for more visual impact
+          const pulseOffset = Math.sin(Date.now() / (200 + i * 40)) * 5; // More prominent timing for each ring
           return baseFrequency + pulseOffset;
         }));
       }
@@ -118,20 +118,20 @@ const Index = () => {
         }}
       />
       
-      {/* Enhanced audio visualizer concentric rings with smoother transitions */}
+      {/* Enhanced audio visualizer concentric rings with more prominent appearance */}
       {isMusicPlaying && visualizerValues.map((value, index) => (
         <div
           key={index}
           className="fixed pointer-events-none z-50"
           style={{
-            width: `${glowSize + value * (index + 1)}px`,
-            height: `${glowSize + value * (index + 1)}px`,
-            transform: `translate(${mousePosition.x - (glowSize + value * (index + 1))/2}px, ${mousePosition.y - (glowSize + value * (index + 1))/2}px)`,
-            opacity: 0.15 + (0.5 / (index + 2)), // Slightly higher opacity
+            width: `${glowSize + value * (index + 1) * 1.3}px`, // Increased scaling factor
+            height: `${glowSize + value * (index + 1) * 1.3}px`, // Increased scaling factor
+            transform: `translate(${mousePosition.x - (glowSize + value * (index + 1) * 1.3)/2}px, ${mousePosition.y - (glowSize + value * (index + 1) * 1.3)/2}px)`,
+            opacity: 0.2 + (0.7 / (index + 2)), // Higher opacity for more prominence
             borderRadius: '50%',
-            border: `1px solid rgba(250, 204, 21, ${0.4 / (index + 1)})`, // Brighter border
+            border: `1.5px solid rgba(250, 204, 21, ${0.6 / (index + 1)})`, // Thicker, brighter border
             background: 'transparent',
-            boxShadow: `0 0 ${5 + index * 3}px ${3 + index}px rgba(250, 204, 21, ${0.2 / (index + 1)})`, // Enhanced glow
+            boxShadow: `0 0 ${8 + index * 4}px ${5 + index * 2}px rgba(250, 204, 21, ${0.3 / (index + 1)})`, // Enhanced glow
             willChange: 'transform, width, height',
             transition: 'transform 0.005s linear, width 0.1s ease-out, height 0.1s ease-out', // Smoother transitions
           }}
