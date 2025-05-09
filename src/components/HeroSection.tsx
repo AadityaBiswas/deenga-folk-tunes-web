@@ -80,7 +80,7 @@ const HeroSection = () => {
           !contentVisible && "opacity-0"
         )} />
         
-        {/* Video container sized to fit the entire section */}
+        {/* Video container sized to cover the entire viewport */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <iframe
             ref={setVideoRef}
@@ -91,7 +91,7 @@ const HeroSection = () => {
               left: '50%',
               width: '100vw',
               height: '100vh',
-              transform: 'translate(-50%, -50%)',
+              transform: 'translate(-50%, -50%) scale(1.1)', // Slightly scale up to ensure edge-to-edge coverage
               pointerEvents: 'none',
               border: 'none',
               objectFit: 'cover'

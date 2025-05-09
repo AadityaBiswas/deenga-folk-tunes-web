@@ -40,38 +40,46 @@ const Index = () => {
       }
     };
 
-    // Create an ultra-smooth and more prominent pulsating animation effect for the glow
-    const pulseInterval = setInterval(() => {
-      setGlowSize(prevSize => {
-        // Ultra-smooth size pulsation
-        return 18 + Math.sin(Date.now() / 400) * 7;
-      });
+    // Create a stable animation flow with requestAnimationFrame for smooth cursor glow
+    let animationFrameId: number;
+    const time = { current: 0 };
+    
+    const animateCursor = () => {
+      time.current += 1;
       
-      setGlowOpacity(prevOpacity => {
-        // Ultra-smooth opacity pulsation
-        return 0.5 + Math.sin(Date.now() / 300) * 0.3;
-      });
+      // Ultra-smooth size pulsation with stable oscillation
+      const newSize = 18 + Math.sin(time.current / 100) * 7;
+      setGlowSize(newSize);
+      
+      // Ultra-smooth opacity pulsation with stable oscillation
+      const newOpacity = 0.5 + Math.sin(time.current / 75) * 0.3;
+      setGlowOpacity(newOpacity);
 
       // If music is playing, animate the visualizer with more dynamic values
       if (isMusicPlaying) {
         setVisualizerValues(prev => prev.map((_, i) => {
           // Generate more dynamic random values that simulate audio visualization
-          const baseFrequency = 12 + Math.random() * 25; // Increased range for more visual impact
-          const pulseOffset = Math.sin(Date.now() / (200 + i * 40)) * 8; // More prominent timing for each ring
+          const baseFrequency = 12 + Math.random() * 25;
+          const pulseOffset = Math.sin(time.current / 50 + i * 0.4) * 8;
           return baseFrequency + pulseOffset;
         }));
       }
-    }, 5); // Update at 200fps for extremely smooth animation
+      
+      animationFrameId = requestAnimationFrame(animateCursor);
+    };
 
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', updateMousePosition);
     window.addEventListener('message', handleMessage);
     
+    // Start the animation loop
+    animationFrameId = requestAnimationFrame(animateCursor);
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', updateMousePosition);
       window.removeEventListener('message', handleMessage);
-      clearInterval(pulseInterval);
+      cancelAnimationFrame(animationFrameId);
     };
   }, [isMusicPlaying]);
 
@@ -109,12 +117,12 @@ const Index = () => {
           background: 'transparent',
           boxShadow: `0 0 30px 20px rgba(250, 204, 21, 0.45)`, // Always yellow glow
           filter: 'blur(3px)',
-          willChange: 'transform, opacity, width, height',
-          transition: 'transform 0.005s linear, width 0.05s ease-out, height 0.05s ease-out, opacity 0.05s ease-out',
+          willChange: 'transform, opacity',
+          transition: 'width 0.05s linear, height 0.05s linear, opacity 0.05s linear',
         }}
       />
       
-      {/* Enhanced audio visualizer concentric rings - more prominent with thicker borders */}
+      {/* Enhanced audio visualizer concentric rings - yellow regardless of music state */}
       {isMusicPlaying && visualizerValues.map((value, index) => (
         <div
           key={index}
@@ -128,8 +136,8 @@ const Index = () => {
             border: `3px solid rgba(250, 204, 21, ${0.8 / (index + 1)})`, // Yellow border
             background: 'transparent',
             boxShadow: `0 0 ${15 + index * 10}px ${12 + index * 5}px rgba(250, 204, 21, ${0.5 / (index + 1)})`, // Enhanced yellow glow
-            willChange: 'transform, width, height',
-            transition: 'transform 0.005s linear, width 0.1s ease-out, height 0.1s ease-out', // Smoother transitions
+            willChange: 'transform',
+            transition: 'transform 0.005s linear',
           }}
         />
       ))}
