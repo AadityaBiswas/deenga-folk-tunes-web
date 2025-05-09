@@ -140,7 +140,7 @@ const Index = () => {
         }}
       />
       
-      {/* Enhanced audio visualizer concentric rings - yellow regardless of music state */}
+      {/* Enhanced audio visualizer concentric rings - yellow regardless of music state - ONLY SHOWN when music is playing */}
       {isMusicPlaying && visualizerValues.map((value, index) => (
         <div
           key={index}

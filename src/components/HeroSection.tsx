@@ -87,11 +87,11 @@ const HeroSection = () => {
             src="https://www.youtube.com/embed/dq2bBjBMUNI?autoplay=1&mute=1&controls=0&loop=1&playlist=dq2bBjBMUNI&playsinline=1&showinfo=0&rel=0&modestbranding=1&enablejsapi=1"
             style={{ 
               position: 'absolute',
-              top: '55%', // Moved down slightly
+              top: '60%', // Moved down even more
               left: '50%',
-              width: '110vw', // Increased width
-              height: '110vh', // Increased height
-              transform: 'translate(-50%, -50%) scale(1.2)', // Increased scale for better coverage
+              width: '120vw', // Increased width
+              height: '120vh', // Increased height
+              transform: 'translate(-50%, -50%) scale(1.4)', // Increased scale for better coverage
               pointerEvents: 'none',
               border: 'none',
               objectFit: 'cover'
