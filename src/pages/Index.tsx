@@ -15,7 +15,7 @@ const Index = () => {
   const [glowSize, setGlowSize] = useState(18);
   const [glowOpacity, setGlowOpacity] = useState(0.5);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
-  const [visualizerValues, setVisualizerValues] = useState<number[]>(Array(10).fill(5)); // Increased array size for more rings
+  const [visualizerValues, setVisualizerValues] = useState<number[]>(Array(10).fill(5));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,46 +40,64 @@ const Index = () => {
       }
     };
 
-    // Create a stable animation flow with requestAnimationFrame for smooth cursor glow
-    let animationFrameId: number;
-    const time = { current: 0 };
+    // Create a stable animation flow for cursor glow ONLY (separate from visualizer)
+    let cursorAnimationId: number;
+    const cursorTime = { current: 0 };
     
     const animateCursor = () => {
-      time.current += 1;
+      cursorTime.current += 1;
       
       // Ultra-smooth size pulsation with stable oscillation
-      const newSize = 18 + Math.sin(time.current / 100) * 7;
+      const newSize = 18 + Math.sin(cursorTime.current / 100) * 7;
       setGlowSize(newSize);
       
       // Ultra-smooth opacity pulsation with stable oscillation
-      const newOpacity = 0.5 + Math.sin(time.current / 75) * 0.3;
+      const newOpacity = 0.5 + Math.sin(cursorTime.current / 75) * 0.3;
       setGlowOpacity(newOpacity);
-
-      // If music is playing, animate the visualizer with more dynamic values
-      if (isMusicPlaying) {
-        setVisualizerValues(prev => prev.map((_, i) => {
-          // Generate more dynamic random values that simulate audio visualization
-          const baseFrequency = 12 + Math.random() * 25;
-          const pulseOffset = Math.sin(time.current / 50 + i * 0.4) * 8;
-          return baseFrequency + pulseOffset;
-        }));
+      
+      cursorAnimationId = requestAnimationFrame(animateCursor);
+    };
+    
+    // Separate animation loop for visualizer (only when music is playing)
+    let visualizerAnimationId: number | null = null;
+    const visualizerTime = { current: 0 };
+    
+    const animateVisualizer = () => {
+      if (!isMusicPlaying) {
+        visualizerAnimationId = null;
+        return;
       }
       
-      animationFrameId = requestAnimationFrame(animateCursor);
+      visualizerTime.current += 1;
+      
+      setVisualizerValues(prev => prev.map((_, i) => {
+        // Generate more dynamic random values that simulate audio visualization
+        const baseFrequency = 12 + Math.random() * 25;
+        const pulseOffset = Math.sin(visualizerTime.current / 50 + i * 0.4) * 8;
+        return baseFrequency + pulseOffset;
+      }));
+      
+      visualizerAnimationId = requestAnimationFrame(animateVisualizer);
     };
 
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', updateMousePosition);
     window.addEventListener('message', handleMessage);
     
-    // Start the animation loop
-    animationFrameId = requestAnimationFrame(animateCursor);
+    // Start the cursor animation loop (always running)
+    cursorAnimationId = requestAnimationFrame(animateCursor);
+    
+    // Update visualizer animation based on music state
+    if (isMusicPlaying && !visualizerAnimationId) {
+      visualizerAnimationId = requestAnimationFrame(animateVisualizer);
+    }
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', updateMousePosition);
       window.removeEventListener('message', handleMessage);
-      cancelAnimationFrame(animationFrameId);
+      cancelAnimationFrame(cursorAnimationId);
+      if (visualizerAnimationId) cancelAnimationFrame(visualizerAnimationId);
     };
   }, [isMusicPlaying]);
 
@@ -117,8 +135,8 @@ const Index = () => {
           background: 'transparent',
           boxShadow: `0 0 30px 20px rgba(250, 204, 21, 0.45)`, // Always yellow glow
           filter: 'blur(3px)',
-          willChange: 'transform, opacity',
-          transition: 'width 0.05s linear, height 0.05s linear, opacity 0.05s linear',
+          willChange: 'transform',
+          transition: 'width 0.2s ease-out, height 0.2s ease-out',
         }}
       />
       
@@ -126,18 +144,18 @@ const Index = () => {
       {isMusicPlaying && visualizerValues.map((value, index) => (
         <div
           key={index}
-          className="fixed pointer-events-none z-50"
+          className="fixed pointer-events-none z-40"
           style={{
-            width: `${glowSize + value * (index + 1) * 2}px`,
-            height: `${glowSize + value * (index + 1) * 2}px`,
-            transform: `translate(${mousePosition.x - (glowSize + value * (index + 1) * 2)/2}px, ${mousePosition.y - (glowSize + value * (index + 1) * 2)/2}px)`,
-            opacity: 0.5 + (0.9 / (index + 2)), // Higher opacity
+            width: `${value * (index + 1) * 3}px`,
+            height: `${value * (index + 1) * 3}px`,
+            transform: `translate(${mousePosition.x - (value * (index + 1) * 3)/2}px, ${mousePosition.y - (value * (index + 1) * 3)/2}px)`,
+            opacity: 0.3 / (index + 1),
             borderRadius: '50%',
-            border: `3px solid rgba(250, 204, 21, ${0.8 / (index + 1)})`, // Yellow border
+            border: `3px solid rgba(250, 204, 21, ${0.5 / (index + 1)})`, // Yellow border
             background: 'transparent',
-            boxShadow: `0 0 ${15 + index * 10}px ${12 + index * 5}px rgba(250, 204, 21, ${0.5 / (index + 1)})`, // Enhanced yellow glow
+            boxShadow: `0 0 ${15 + index * 10}px ${12 + index * 5}px rgba(250, 204, 21, ${0.3 / (index + 1)})`, // Enhanced yellow glow
             willChange: 'transform',
-            transition: 'transform 0.005s linear',
+            transition: 'transform 0.1s ease-out',
           }}
         />
       ))}
