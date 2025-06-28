@@ -15,7 +15,6 @@ const Index = () => {
   const [glowSize, setGlowSize] = useState(18);
   const [glowOpacity, setGlowOpacity] = useState(0.5);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
-  const [visualizerValues, setVisualizerValues] = useState<number[]>(Array(10).fill(5));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,19 +50,22 @@ const Index = () => {
     };
   }, []);
 
-  // Separate useEffect for cursor animation - completely independent
+  // Cursor animation - only when music is NOT playing
   useEffect(() => {
     let cursorAnimationId: number;
     const cursorTime = { current: 0 };
     
     const animateCursor = () => {
+      if (isMusicPlaying) {
+        cursorAnimationId = requestAnimationFrame(animateCursor);
+        return;
+      }
+      
       cursorTime.current += 1;
       
-      // Consistent size pulsation - never affected by music state
       const newSize = 18 + Math.sin(cursorTime.current / 100) * 7;
       setGlowSize(newSize);
       
-      // Consistent opacity pulsation - never affected by music state
       const newOpacity = 0.5 + Math.sin(cursorTime.current / 75) * 0.3;
       setGlowOpacity(newOpacity);
       
@@ -74,37 +76,6 @@ const Index = () => {
     
     return () => {
       cancelAnimationFrame(cursorAnimationId);
-    };
-  }, []); // Empty dependency array - never re-runs
-
-  // Separate useEffect for visualizer - only depends on music state
-  useEffect(() => {
-    let visualizerAnimationId: number | null = null;
-    const visualizerTime = { current: 0 };
-    
-    const animateVisualizer = () => {
-      if (!isMusicPlaying) {
-        visualizerAnimationId = null;
-        return;
-      }
-      
-      visualizerTime.current += 1;
-      
-      setVisualizerValues(prev => prev.map((_, i) => {
-        const baseFrequency = 12 + Math.random() * 25;
-        const pulseOffset = Math.sin(visualizerTime.current / 50 + i * 0.4) * 8;
-        return baseFrequency + pulseOffset;
-      }));
-      
-      visualizerAnimationId = requestAnimationFrame(animateVisualizer);
-    };
-
-    if (isMusicPlaying && !visualizerAnimationId) {
-      visualizerAnimationId = requestAnimationFrame(animateVisualizer);
-    }
-    
-    return () => {
-      if (visualizerAnimationId) cancelAnimationFrame(visualizerAnimationId);
     };
   }, [isMusicPlaying]);
 
@@ -129,43 +100,25 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Fixed cursor glow effect - completely stable and independent of music state */}
-      <div
-        className="fixed pointer-events-none z-50"
-        style={{
-          width: `${glowSize}px`,
-          height: `${glowSize}px`,
-          transform: `translate(${mousePosition.x - glowSize/2}px, ${mousePosition.y - glowSize/2}px)`,
-          opacity: glowOpacity,
-          borderRadius: '50%',
-          background: 'transparent',
-          boxShadow: `0 0 30px 20px rgba(250, 204, 21, 0.45)`,
-          filter: 'blur(3px)',
-          willChange: 'transform',
-          transition: 'width 0.2s ease-out, height 0.2s ease-out',
-        }}
-      />
-      
-      {/* Audio visualizer rings - separate from cursor glow - ONLY when music is playing */}
-      {isMusicPlaying && visualizerValues.map((value, index) => (
+    <div className="min-h-screen relative overflow-hidden" style={{ cursor: isMusicPlaying ? 'auto' : 'none' }}>
+      {/* Cursor glow effect - only when music is NOT playing */}
+      {!isMusicPlaying && (
         <div
-          key={index}
-          className="fixed pointer-events-none z-40"
+          className="fixed pointer-events-none z-50"
           style={{
-            width: `${value * (index + 1) * 3}px`,
-            height: `${value * (index + 1) * 3}px`,
-            transform: `translate(${mousePosition.x - (value * (index + 1) * 3)/2}px, ${mousePosition.y - (value * (index + 1) * 3)/2}px)`,
-            opacity: 0.3 / (index + 1),
+            width: `${glowSize}px`,
+            height: `${glowSize}px`,
+            transform: `translate(${mousePosition.x - glowSize/2}px, ${mousePosition.y - glowSize/2}px)`,
+            opacity: glowOpacity,
             borderRadius: '50%',
-            border: `3px solid rgba(250, 204, 21, ${0.5 / (index + 1)})`,
             background: 'transparent',
-            boxShadow: `0 0 ${15 + index * 10}px ${12 + index * 5}px rgba(250, 204, 21, ${0.3 / (index + 1)})`,
+            boxShadow: `0 0 30px 20px rgba(250, 204, 21, 0.45)`,
+            filter: 'blur(3px)',
             willChange: 'transform',
-            transition: 'transform 0.1s ease-out',
+            transition: 'width 0.2s ease-out, height 0.2s ease-out',
           }}
         />
-      ))}
+      )}
 
       {/* Scroll to top button - visible only when NOT playing music */}
       <button

@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
@@ -73,18 +74,20 @@ const HeroSection = () => {
           !contentVisible && "opacity-0"
         )} />
         
-        {/* Video container sized to cover the entire viewport and beyond */}
+        {/* Video container sized to cover the entire viewport */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <iframe
             ref={setVideoRef}
             src="https://www.youtube.com/embed/dq2bBjBMUNI?autoplay=1&mute=1&controls=0&loop=1&playlist=dq2bBjBMUNI&playsinline=1&showinfo=0&rel=0&modestbranding=1&enablejsapi=1&hd=1&vq=hd1080"
             style={{ 
               position: 'absolute',
-              top: '75%', // Moved further down to stretch more
+              top: '50%',
               left: '50%',
-              width: '140vw', // Increased width even more
-              height: '140vh', // Increased height even more
-              transform: 'translate(-50%, -50%) scale(1.6)', // Increased scale for maximum coverage
+              width: '177.78vh', // 16:9 aspect ratio width based on viewport height
+              height: '100vh',
+              minWidth: '100vw',
+              minHeight: '56.25vw', // 16:9 aspect ratio height based on viewport width
+              transform: 'translate(-50%, -50%)',
               pointerEvents: 'none',
               border: 'none',
               objectFit: 'cover'
@@ -117,7 +120,7 @@ const HeroSection = () => {
           
           <div className={cn(
             "flex justify-center transition-all duration-1000 opacity-0 translate-y-4",
-            isLoaded && "opacity-100 translate-y-0 delay-[2000ms]" // 7 seconds total (5s initial delay + 2s additional delay)
+            isLoaded && "opacity-100 translate-y-0 delay-[2000ms]"
           )}>
             <a 
               href="#music" 
@@ -140,7 +143,7 @@ const HeroSection = () => {
         aria-label={isMusicPlaying ? "Turn music off" : "Turn music on"}
       >
         <div className="relative">
-          {/* Enhanced visualizer rings (only visible when music is playing) - made more prominent */}
+          {/* Enhanced visualizer rings (only visible when music is playing) */}
           {isMusicPlaying && (
             <>
               <div className="absolute inset-0 -m-3 rounded-full animate-pulse-slow bg-transparent border-2 border-white/90"></div>
