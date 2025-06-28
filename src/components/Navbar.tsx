@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
@@ -28,8 +29,8 @@ const Navbar = () => {
     }
   };
 
-  // Remove "Home" from the navItems array
-  const navItems = ["About", "Music", "Contact"];
+  // Add Gallery to the navItems array
+  const navItems = ["About", "Music", "Gallery", "Contact"];
 
   return (
     <header 
@@ -72,17 +73,31 @@ const Navbar = () => {
         </button>
         
         <nav className="hidden md:flex items-center gap-8">
-          {navItems.map((item) => (
-            <a 
-              key={item} 
-              href={`#${item.toLowerCase()}`}
-              onClick={(e) => handleNavClick(e, item.toLowerCase())}
-              className="text-white/80 hover:text-deenga-yellow transition-all duration-300 text-sm uppercase tracking-wider font-medium relative group"
-            >
-              <span className="relative z-10">{item}</span>
-              <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-deenga-yellow transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
-            </a>
-          ))}
+          {navItems.map((item) => {
+            if (item === "Gallery") {
+              return (
+                <Link 
+                  key={item} 
+                  to="/gallery"
+                  className="text-white/80 hover:text-deenga-yellow transition-all duration-300 text-sm uppercase tracking-wider font-medium relative group"
+                >
+                  <span className="relative z-10">{item}</span>
+                  <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-deenga-yellow transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
+                </Link>
+              );
+            }
+            return (
+              <a 
+                key={item} 
+                href={`#${item.toLowerCase()}`}
+                onClick={(e) => handleNavClick(e, item.toLowerCase())}
+                className="text-white/80 hover:text-deenga-yellow transition-all duration-300 text-sm uppercase tracking-wider font-medium relative group"
+              >
+                <span className="relative z-10">{item}</span>
+                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-deenga-yellow transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
+              </a>
+            );
+          })}
         </nav>
       </div>
       
@@ -91,16 +106,30 @@ const Navbar = () => {
         isMenuOpen ? "max-h-screen py-4 opacity-100" : "max-h-0 py-0 opacity-0 overflow-hidden"
       )}>
         <div className="container mx-auto px-4 flex flex-col gap-4">
-          {navItems.map((item) => (
-            <a 
-              key={item} 
-              href={`#${item.toLowerCase()}`}
-              onClick={(e) => handleNavClick(e, item.toLowerCase())}
-              className="text-white/80 hover:text-deenga-yellow py-2 transition-colors duration-300 text-base uppercase tracking-wide font-medium"
-            >
-              {item}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            if (item === "Gallery") {
+              return (
+                <Link 
+                  key={item} 
+                  to="/gallery"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-white/80 hover:text-deenga-yellow py-2 transition-colors duration-300 text-base uppercase tracking-wide font-medium"
+                >
+                  {item}
+                </Link>
+              );
+            }
+            return (
+              <a 
+                key={item} 
+                href={`#${item.toLowerCase()}`}
+                onClick={(e) => handleNavClick(e, item.toLowerCase())}
+                className="text-white/80 hover:text-deenga-yellow py-2 transition-colors duration-300 text-base uppercase tracking-wide font-medium"
+              >
+                {item}
+              </a>
+            );
+          })}
         </div>
       </nav>
     </header>
