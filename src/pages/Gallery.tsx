@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { cn } from "@/lib/utils";
@@ -7,6 +7,43 @@ import { X } from "lucide-react";
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [glowSize, setGlowSize] = useState(18);
+  const [glowOpacity, setGlowOpacity] = useState(0.5);
+
+  // Mouse position tracking
+  useEffect(() => {
+    const updateMousePosition = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener('mousemove', updateMousePosition);
+    return () => window.removeEventListener('mousemove', updateMousePosition);
+  }, []);
+
+  // Cursor glow animation
+  useEffect(() => {
+    let cursorAnimationId: number;
+    const cursorTime = { current: 0 };
+    
+    const animateCursor = () => {
+      cursorTime.current += 1;
+      
+      const newSize = 18 + Math.sin(cursorTime.current / 100) * 7;
+      setGlowSize(newSize);
+      
+      const newOpacity = 0.5 + Math.sin(cursorTime.current / 75) * 0.3;
+      setGlowOpacity(newOpacity);
+      
+      cursorAnimationId = requestAnimationFrame(animateCursor);
+    };
+    
+    cursorAnimationId = requestAnimationFrame(animateCursor);
+    
+    return () => {
+      cancelAnimationFrame(cursorAnimationId);
+    };
+  }, []);
 
   const performanceImages = [
     {
@@ -52,7 +89,24 @@ const Gallery = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      {/* Cursor glow effect */}
+      <div
+        className="fixed pointer-events-none z-50"
+        style={{
+          width: `${glowSize}px`,
+          height: `${glowSize}px`,
+          transform: `translate(${mousePosition.x - glowSize/2}px, ${mousePosition.y - glowSize/2}px)`,
+          opacity: glowOpacity,
+          borderRadius: '50%',
+          background: 'transparent',
+          boxShadow: `0 0 30px 20px rgba(250, 204, 21, 0.45)`,
+          filter: 'blur(3px)',
+          willChange: 'transform',
+          transition: 'width 0.2s ease-out, height 0.2s ease-out',
+        }}
+      />
+
       <Navbar />
       
       <section className="py-20 px-4">
