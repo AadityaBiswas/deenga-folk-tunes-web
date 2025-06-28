@@ -1,11 +1,13 @@
 
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const location = useLocation();
+  const isGalleryPage = location.pathname === '/gallery';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +21,13 @@ const Navbar = () => {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
+    
+    // If we're on the gallery page and trying to navigate to a section, go to home first
+    if (isGalleryPage) {
+      window.location.href = `/#${id.toLowerCase()}`;
+      return;
+    }
+    
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({
@@ -29,7 +38,6 @@ const Navbar = () => {
     }
   };
 
-  // Add Gallery to the navItems array
   const navItems = ["About", "Music", "Gallery", "Contact"];
 
   return (
@@ -40,7 +48,7 @@ const Navbar = () => {
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <a href="#" className="flex items-center group">
+        <Link to="/" className="flex items-center group">
           <img 
             src="/lovable-uploads/8d92703c-a15e-44c9-978f-fcc99a12c571.png"
             alt="Deenga Logo"
@@ -49,7 +57,7 @@ const Navbar = () => {
           <span className="hidden md:block text-white/60 ml-3 text-sm">
             Folk Rock | Kolkata, India
           </span>
-        </a>
+        </Link>
         
         <button 
           className="md:hidden text-white focus:outline-none"
@@ -89,7 +97,7 @@ const Navbar = () => {
             return (
               <a 
                 key={item} 
-                href={`#${item.toLowerCase()}`}
+                href={isGalleryPage ? `/#${item.toLowerCase()}` : `#${item.toLowerCase()}`}
                 onClick={(e) => handleNavClick(e, item.toLowerCase())}
                 className="text-white/80 hover:text-deenga-yellow transition-all duration-300 text-sm uppercase tracking-wider font-medium relative group"
               >
@@ -122,7 +130,7 @@ const Navbar = () => {
             return (
               <a 
                 key={item} 
-                href={`#${item.toLowerCase()}`}
+                href={isGalleryPage ? `/#${item.toLowerCase()}` : `#${item.toLowerCase()}`}
                 onClick={(e) => handleNavClick(e, item.toLowerCase())}
                 className="text-white/80 hover:text-deenga-yellow py-2 transition-colors duration-300 text-base uppercase tracking-wide font-medium"
               >
