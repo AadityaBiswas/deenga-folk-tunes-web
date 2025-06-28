@@ -40,18 +40,18 @@ const Index = () => {
       }
     };
 
-    // Create a stable animation flow for cursor glow ONLY (separate from visualizer)
+    // Create a stable animation flow for cursor glow (completely independent of music state)
     let cursorAnimationId: number;
     const cursorTime = { current: 0 };
     
     const animateCursor = () => {
       cursorTime.current += 1;
       
-      // Ultra-smooth size pulsation with stable oscillation
+      // Consistent size pulsation - never affected by music state
       const newSize = 18 + Math.sin(cursorTime.current / 100) * 7;
       setGlowSize(newSize);
       
-      // Ultra-smooth opacity pulsation with stable oscillation
+      // Consistent opacity pulsation - never affected by music state
       const newOpacity = 0.5 + Math.sin(cursorTime.current / 75) * 0.3;
       setGlowOpacity(newOpacity);
       
@@ -71,7 +71,7 @@ const Index = () => {
       visualizerTime.current += 1;
       
       setVisualizerValues(prev => prev.map((_, i) => {
-        // Generate more dynamic random values that simulate audio visualization
+        // Generate dynamic random values for visualizer rings only
         const baseFrequency = 12 + Math.random() * 25;
         const pulseOffset = Math.sin(visualizerTime.current / 50 + i * 0.4) * 8;
         return baseFrequency + pulseOffset;
@@ -84,7 +84,7 @@ const Index = () => {
     window.addEventListener('mousemove', updateMousePosition);
     window.addEventListener('message', handleMessage);
     
-    // Start the cursor animation loop (always running)
+    // Start the cursor animation loop (always running, independent of music)
     cursorAnimationId = requestAnimationFrame(animateCursor);
     
     // Update visualizer animation based on music state
@@ -123,7 +123,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Fixed cursor glow effect - always yellow regardless of music state */}
+      {/* Fixed cursor glow effect - completely stable and independent of music state */}
       <div
         className="fixed pointer-events-none z-50"
         style={{
@@ -133,14 +133,14 @@ const Index = () => {
           opacity: glowOpacity,
           borderRadius: '50%',
           background: 'transparent',
-          boxShadow: `0 0 30px 20px rgba(250, 204, 21, 0.45)`, // Always yellow glow
+          boxShadow: `0 0 30px 20px rgba(250, 204, 21, 0.45)`, // Consistent yellow glow
           filter: 'blur(3px)',
           willChange: 'transform',
           transition: 'width 0.2s ease-out, height 0.2s ease-out',
         }}
       />
       
-      {/* Enhanced audio visualizer concentric rings - yellow regardless of music state - ONLY SHOWN when music is playing */}
+      {/* Audio visualizer rings - separate from cursor glow - ONLY when music is playing */}
       {isMusicPlaying && visualizerValues.map((value, index) => (
         <div
           key={index}
@@ -151,9 +151,9 @@ const Index = () => {
             transform: `translate(${mousePosition.x - (value * (index + 1) * 3)/2}px, ${mousePosition.y - (value * (index + 1) * 3)/2}px)`,
             opacity: 0.3 / (index + 1),
             borderRadius: '50%',
-            border: `3px solid rgba(250, 204, 21, ${0.5 / (index + 1)})`, // Yellow border
+            border: `3px solid rgba(250, 204, 21, ${0.5 / (index + 1)})`,
             background: 'transparent',
-            boxShadow: `0 0 ${15 + index * 10}px ${12 + index * 5}px rgba(250, 204, 21, ${0.3 / (index + 1)})`, // Enhanced yellow glow
+            boxShadow: `0 0 ${15 + index * 10}px ${12 + index * 5}px rgba(250, 204, 21, ${0.3 / (index + 1)})`,
             willChange: 'transform',
             transition: 'transform 0.1s ease-out',
           }}

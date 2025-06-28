@@ -84,14 +84,14 @@ const HeroSection = () => {
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <iframe
             ref={setVideoRef}
-            src="https://www.youtube.com/embed/dq2bBjBMUNI?autoplay=1&mute=1&controls=0&loop=1&playlist=dq2bBjBMUNI&playsinline=1&showinfo=0&rel=0&modestbranding=1&enablejsapi=1"
+            src="https://www.youtube.com/embed/dq2bBjBMUNI?autoplay=1&mute=1&controls=0&loop=1&playlist=dq2bBjBMUNI&playsinline=1&showinfo=0&rel=0&modestbranding=1&enablejsapi=1&hd=1&vq=hd1080"
             style={{ 
               position: 'absolute',
-              top: '60%', // Moved down even more
+              top: '65%', // Moved down further
               left: '50%',
-              width: '120vw', // Increased width
-              height: '120vh', // Increased height
-              transform: 'translate(-50%, -50%) scale(1.4)', // Increased scale for better coverage
+              width: '130vw', // Increased width for better coverage
+              height: '130vh', // Increased height for better coverage
+              transform: 'translate(-50%, -50%) scale(1.5)', // Increased scale for maximum coverage
               pointerEvents: 'none',
               border: 'none',
               objectFit: 'cover'
