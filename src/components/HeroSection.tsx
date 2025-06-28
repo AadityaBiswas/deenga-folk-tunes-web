@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
@@ -83,10 +82,8 @@ const HeroSection = () => {
               position: 'absolute',
               top: '50%',
               left: '50%',
-              width: '177.78vh', // 16:9 aspect ratio width based on viewport height
-              height: '100vh',
-              minWidth: '100vw',
-              minHeight: '56.25vw', // 16:9 aspect ratio height based on viewport width
+              width: 'max(100vw, 177.78vh)', // Ensure minimum coverage
+              height: 'max(100vh, 56.25vw)', // Ensure minimum coverage
               transform: 'translate(-50%, -50%)',
               pointerEvents: 'none',
               border: 'none',
@@ -143,16 +140,6 @@ const HeroSection = () => {
         aria-label={isMusicPlaying ? "Turn music off" : "Turn music on"}
       >
         <div className="relative">
-          {/* Enhanced visualizer rings (only visible when music is playing) */}
-          {isMusicPlaying && (
-            <>
-              <div className="absolute inset-0 -m-3 rounded-full animate-pulse-slow bg-transparent border-2 border-white/90"></div>
-              <div className="absolute inset-0 -m-6 rounded-full animate-pulse-slow animation-delay-300 bg-transparent border-2 border-white/80"></div>
-              <div className="absolute inset-0 -m-10 rounded-full animate-pulse-slow animation-delay-600 bg-transparent border-2 border-white/70"></div>
-              <div className="absolute inset-0 -m-14 rounded-full animate-pulse-slow animation-delay-900 bg-transparent border-2 border-white/60"></div>
-            </>
-          )}
-          
           {/* Icon container with transition animation */}
           <div className={`relative transition-transform duration-500 ${iconTransition ? 'scale-0' : 'scale-100'}`}>
             {isMusicPlaying ? (
