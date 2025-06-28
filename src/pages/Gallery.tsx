@@ -9,7 +9,6 @@ const Gallery = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [glowSize, setGlowSize] = useState(18);
   const [glowOpacity, setGlowOpacity] = useState(0.5);
-  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
 
   // Mouse position tracking
   useEffect(() => {
@@ -21,45 +20,12 @@ const Gallery = () => {
     return () => window.removeEventListener('mousemove', updateMousePosition);
   }, []);
 
-  // Listen for music state changes
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      try {
-        if (typeof event.data === 'string') {
-          const data = JSON.parse(event.data);
-          if (data.type === 'musicStateChange') {
-            setIsMusicPlaying(data.playing);
-          }
-        }
-      } catch (e) {
-        // Silently ignore parsing errors
-      }
-    };
-
-    const handleMusicToggle = (event: CustomEvent<{playing: boolean}>) => {
-      setIsMusicPlaying(event.detail.playing);
-    };
-    
-    window.addEventListener('message', handleMessage);
-    window.addEventListener('musicToggled' as any, handleMusicToggle);
-    
-    return () => {
-      window.removeEventListener('message', handleMessage);
-      window.removeEventListener('musicToggled' as any, handleMusicToggle);
-    };
-  }, []);
-
-  // Cursor glow animation - only when music is NOT playing
+  // Cursor glow animation - always active
   useEffect(() => {
     let cursorAnimationId: number;
     const cursorTime = { current: 0 };
     
     const animateCursor = () => {
-      if (isMusicPlaying) {
-        cursorAnimationId = requestAnimationFrame(animateCursor);
-        return;
-      }
-      
       cursorTime.current += 1;
       
       const newSize = 18 + Math.sin(cursorTime.current / 100) * 7;
@@ -76,7 +42,7 @@ const Gallery = () => {
     return () => {
       cancelAnimationFrame(cursorAnimationId);
     };
-  }, [isMusicPlaying]);
+  }, []);
 
   const performanceImages = [
     {
@@ -122,25 +88,23 @@ const Gallery = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden" style={{ cursor: isMusicPlaying ? 'auto' : 'none' }}>
-      {/* Cursor glow effect - only when music is NOT playing */}
-      {!isMusicPlaying && (
-        <div
-          className="fixed pointer-events-none z-50"
-          style={{
-            width: `${glowSize}px`,
-            height: `${glowSize}px`,
-            transform: `translate(${mousePosition.x - glowSize/2}px, ${mousePosition.y - glowSize/2}px)`,
-            opacity: glowOpacity,
-            borderRadius: '50%',
-            background: 'transparent',
-            boxShadow: `0 0 30px 20px rgba(250, 204, 21, 0.45)`,
-            filter: 'blur(3px)',
-            willChange: 'transform',
-            transition: 'width 0.2s ease-out, height 0.2s ease-out',
-          }}
-        />
-      )}
+    <div className="min-h-screen bg-black text-white relative overflow-hidden" style={{ cursor: 'none' }}>
+      {/* Cursor glow effect - always visible */}
+      <div
+        className="fixed pointer-events-none z-50"
+        style={{
+          width: `${glowSize}px`,
+          height: `${glowSize}px`,
+          transform: `translate(${mousePosition.x - glowSize/2}px, ${mousePosition.y - glowSize/2}px)`,
+          opacity: glowOpacity,
+          borderRadius: '50%',
+          background: 'transparent',
+          boxShadow: `0 0 30px 20px rgba(250, 204, 21, 0.45)`,
+          filter: 'blur(3px)',
+          willChange: 'transform',
+          transition: 'width 0.2s ease-out, height 0.2s ease-out',
+        }}
+      />
 
       <Navbar />
       
