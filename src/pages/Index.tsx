@@ -40,7 +40,19 @@ const Index = () => {
       }
     };
 
-    // Create a stable animation flow for cursor glow (completely independent of music state)
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', updateMousePosition);
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', updateMousePosition);
+      window.removeEventListener('message', handleMessage);
+    };
+  }, []);
+
+  // Separate useEffect for cursor animation - completely independent
+  useEffect(() => {
     let cursorAnimationId: number;
     const cursorTime = { current: 0 };
     
@@ -58,7 +70,15 @@ const Index = () => {
       cursorAnimationId = requestAnimationFrame(animateCursor);
     };
     
-    // Separate animation loop for visualizer (only when music is playing)
+    cursorAnimationId = requestAnimationFrame(animateCursor);
+    
+    return () => {
+      cancelAnimationFrame(cursorAnimationId);
+    };
+  }, []); // Empty dependency array - never re-runs
+
+  // Separate useEffect for visualizer - only depends on music state
+  useEffect(() => {
     let visualizerAnimationId: number | null = null;
     const visualizerTime = { current: 0 };
     
@@ -71,7 +91,6 @@ const Index = () => {
       visualizerTime.current += 1;
       
       setVisualizerValues(prev => prev.map((_, i) => {
-        // Generate dynamic random values for visualizer rings only
         const baseFrequency = 12 + Math.random() * 25;
         const pulseOffset = Math.sin(visualizerTime.current / 50 + i * 0.4) * 8;
         return baseFrequency + pulseOffset;
@@ -80,23 +99,11 @@ const Index = () => {
       visualizerAnimationId = requestAnimationFrame(animateVisualizer);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('mousemove', updateMousePosition);
-    window.addEventListener('message', handleMessage);
-    
-    // Start the cursor animation loop (always running, independent of music)
-    cursorAnimationId = requestAnimationFrame(animateCursor);
-    
-    // Update visualizer animation based on music state
     if (isMusicPlaying && !visualizerAnimationId) {
       visualizerAnimationId = requestAnimationFrame(animateVisualizer);
     }
     
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('mousemove', updateMousePosition);
-      window.removeEventListener('message', handleMessage);
-      cancelAnimationFrame(cursorAnimationId);
       if (visualizerAnimationId) cancelAnimationFrame(visualizerAnimationId);
     };
   }, [isMusicPlaying]);
@@ -133,7 +140,7 @@ const Index = () => {
           opacity: glowOpacity,
           borderRadius: '50%',
           background: 'transparent',
-          boxShadow: `0 0 30px 20px rgba(250, 204, 21, 0.45)`, // Consistent yellow glow
+          boxShadow: `0 0 30px 20px rgba(250, 204, 21, 0.45)`,
           filter: 'blur(3px)',
           willChange: 'transform',
           transition: 'width 0.2s ease-out, height 0.2s ease-out',

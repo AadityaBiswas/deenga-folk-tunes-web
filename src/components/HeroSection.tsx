@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
@@ -16,7 +15,7 @@ const HeroSection = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoaded(true);
-    }, 5000); // Set 5 second delay for initial fade-in
+    }, 5000);
 
     return () => {
       clearTimeout(timer);
@@ -32,23 +31,19 @@ const HeroSection = () => {
   };
 
   const toggleMusic = () => {
-    // Start icon transition animation
     setIconTransition(true);
     
     const newMusicState = !isMusicPlaying;
     
-    // Only hide content when turning music ON (clicking the mute icon)
     if (!isMusicPlaying) {
       setContentVisible(false);
     } else {
       setContentVisible(true);
     }
     
-    // Delay the actual music toggle to allow for animation
     setTimeout(() => {
       setIsMusicPlaying(newMusicState);
       
-      // Use postMessage to control YouTube iframe
       if (videoRef) {
         const command = isMusicPlaying ? 'mute' : 'unMute';
         videoRef.contentWindow?.postMessage(JSON.stringify({
@@ -58,10 +53,8 @@ const HeroSection = () => {
         }), '*');
       }
       
-      // Dispatch event to notify other components
       dispatchMusicToggleEvent(newMusicState);
       
-      // Reset transition state
       setTimeout(() => setIconTransition(false), 300);
     }, 300);
   };
@@ -80,18 +73,18 @@ const HeroSection = () => {
           !contentVisible && "opacity-0"
         )} />
         
-        {/* Video container sized to cover the entire viewport */}
+        {/* Video container sized to cover the entire viewport and beyond */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <iframe
             ref={setVideoRef}
             src="https://www.youtube.com/embed/dq2bBjBMUNI?autoplay=1&mute=1&controls=0&loop=1&playlist=dq2bBjBMUNI&playsinline=1&showinfo=0&rel=0&modestbranding=1&enablejsapi=1&hd=1&vq=hd1080"
             style={{ 
               position: 'absolute',
-              top: '65%', // Moved down further
+              top: '75%', // Moved further down to stretch more
               left: '50%',
-              width: '130vw', // Increased width for better coverage
-              height: '130vh', // Increased height for better coverage
-              transform: 'translate(-50%, -50%) scale(1.5)', // Increased scale for maximum coverage
+              width: '140vw', // Increased width even more
+              height: '140vh', // Increased height even more
+              transform: 'translate(-50%, -50%) scale(1.6)', // Increased scale for maximum coverage
               pointerEvents: 'none',
               border: 'none',
               objectFit: 'cover'
@@ -140,7 +133,7 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Music control button - now fully transparent with white color */}
+      {/* Music control button */}
       <button 
         onClick={toggleMusic}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 p-4 rounded-full bg-transparent hover:bg-white/10 transition-all duration-500 border border-white/20"
