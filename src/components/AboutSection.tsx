@@ -2,15 +2,6 @@
 import { cn } from "@/lib/utils";
 
 const AboutSection = () => {
-  const bandMembers = [
-    { name: "Subhamoy Dey Sarkar", role: "Vocal" },
-    { name: "Biswadeep Biswas", role: "Violin" },
-    { name: "Indrajit Maitra", role: "Drums" },
-    { name: "Sujoy Maitra", role: "Bass" },
-    { name: "Rakesh Debnath", role: "Guitar" },
-    { name: "Chirantan Mitra", role: "Guitar" },
-    { name: "Sarthak Bhattacharjee", role: "Sound Engineer" },
-  ];
 
   return (
     <section id="about" className="section-padding bg-black relative">
@@ -55,19 +46,6 @@ const AboutSection = () => {
                 <span><strong>"Ghum Bhangche"</strong> (2023) - our latest album showcasing our growth and versatility</span>
               </li>
             </ul>
-            <div className="pt-4">
-              <h3 className="font-serif text-xl font-semibold text-white mb-4">The Band</h3>
-              <div className="grid grid-cols-2 gap-x-8 gap-y-3">
-                {bandMembers.map((member) => (
-                  <div key={member.name} className="group">
-                    <p className="font-medium text-white group-hover:text-deenga-purple transition-colors">
-                      {member.name}
-                    </p>
-                    <p className="text-sm text-gray-400">{member.role}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </div>
