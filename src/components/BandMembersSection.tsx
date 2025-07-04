@@ -30,7 +30,7 @@ const BandMembersSection = () => {
     {
       name: "Chirantan Mitra",
       role: "Guitarist",
-      image: "/lovable-uploads/6a4e217b-b065-4423-800a-0966e9fc60a2.png"
+      image: "/lovable-uploads/49481c08-cae3-4fbc-aec6-bf64f6d855ee.png"
     }
   ];
 
