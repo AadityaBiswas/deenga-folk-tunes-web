@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
+import BandMembersSection from "../components/BandMembersSection";
 import AboutSection from "../components/AboutSection";
 import AlbumSection from "../components/AlbumSection";
 import ContactSection from "../components/ContactSection";
@@ -99,6 +100,7 @@ const Index = () => {
       <div className="relative z-10">
         <Navbar />
         <HeroSection />
+        <BandMembersSection />
         <AboutSection />
         <AlbumSection />
         <ContactSection />
