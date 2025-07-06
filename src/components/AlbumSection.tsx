@@ -7,7 +7,7 @@ const AlbumSection = () => {
       id: "doob-satar",
       title: "Doob Satar",
       year: 2013,
-      coverImage: "/lovable-uploads/172d8d49-81eb-4d02-9455-5458576680d1.png",
+      coverImage: "/lovable-uploads/30dcc4c0-adea-4a15-aa0c-7a83039575d8.png",
       spotifyUrl: "https://open.spotify.com/album/6j3BmgWzmvIkhoJYi6J7HT?si=PLADhTGjTjuZ_-n15t6ciw",
       tracks: [
         { title: "Jhiri Jhiri Bristi" },
