@@ -7,8 +7,8 @@ const GallerySection = () => {
     },
     {
       id: 2,
-      src: "/lovable-uploads/45a9c88e-c978-49c7-9f33-d6ae7d66d70d.png",
-      alt: "Concert stage with dramatic lighting and crowd"
+      src: "/lovable-uploads/e3a086b0-c296-49b7-8f54-30d88a423bbf.png",
+      alt: "Deenga band group photo with awards and recognition"
     },
     {
       id: 3,
@@ -17,8 +17,8 @@ const GallerySection = () => {
     },
     {
       id: 4,
-      src: "/lovable-uploads/25931ceb-1d92-4f1e-8807-9075817e6d06.png",
-      alt: "Deenga concert with colorful stage lighting"
+      src: "/lovable-uploads/e7f751cb-d856-409e-a134-a1c7fff565d2.png",
+      alt: "Live performance with dramatic blue and purple lighting"
     },
     {
       id: 5,
@@ -32,6 +32,16 @@ const GallerySection = () => {
     },
     {
       id: 7,
+      src: "/lovable-uploads/e73f8227-5c6f-4f11-a4ee-7e51231d1762.png",
+      alt: "Concert performance with crowd and colorful stage lighting"
+    },
+    {
+      id: 8,
+      src: "/lovable-uploads/7220017e-7549-4813-bae9-78f494efab37.png",
+      alt: "Full band performance with blue backdrop and crowd"
+    },
+    {
+      id: 9,
       src: "/lovable-uploads/337128e9-8929-4890-9509-fef162810671.png",
       alt: "Concert performance with yellow stage lights"
     }

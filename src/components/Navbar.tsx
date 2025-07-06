@@ -38,7 +38,7 @@ const Navbar = () => {
     }
   };
 
-  const navItems = ["Band", "About", "Music", "Contact"];
+  const navItems = ["Band", "About", "Gallery", "Music", "Contact"];
 
   return (
     <header 
