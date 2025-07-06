@@ -11,12 +11,11 @@ const AlbumSection = () => {
       spotifyUrl: "https://open.spotify.com/album/6j3BmgWzmvIkhoJYi6J7HT?si=PLADhTGjTjuZ_-n15t6ciw",
       tracks: [
         { title: "Jhiri Jhiri Bristi" },
-        { title: "Tai" },
-        { title: "Ali Aja" },
+        { title: "Khaja Baba" },
         { title: "Bhoot" },
-        { title: "Ami Dekhini" },
-        { title: "Ragir Ragini" },
-        { title: "Deho Tori" }
+        { title: "Rai" },
+        { title: "Tomari naam e" },
+        { title: "Ami Dekhechi" }
       ]
     },
     {
