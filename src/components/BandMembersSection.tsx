@@ -4,32 +4,32 @@ const BandMembersSection = () => {
   const bandMembers = [
     {
       name: "Subhamoy Dey Sarkar",
-      role: "Vocalist",
+      role: "Vocal",
       image: "/lovable-uploads/a928a39d-6958-40bb-b9cb-88dc6f35298c.png"
     },
     {
       name: "Rakesh Debnath",
-      role: "Guitarist",
+      role: "Lead Guitar",
       image: "/lovable-uploads/dc8858c9-cd9a-4980-b123-1017a4ea7367.png"
     },
     {
       name: "Sujoy Mitra",
-      role: "Bassist",
+      role: "Bass",
       image: "/lovable-uploads/d4508a78-4d87-4a22-9798-f76c60712455.png"
     },
     {
       name: "Biswadeep Biswas",
-      role: "Violinist",
+      role: "Violin",
       image: "/lovable-uploads/3cb0194f-0ff1-4a7e-98e1-6c61d679c9a2.png"
     },
     {
-      name: "Indrajit Moitra",
-      role: "Drummer",
+      name: "Indrajit Maitra",
+      role: "Drums",
       image: "/lovable-uploads/202d70d9-adab-4ec2-9cea-007075b39807.png"
     },
     {
       name: "Chirantan Mitra",
-      role: "Guitarist",
+      role: "Lead Guitar",
       image: "/lovable-uploads/49481c08-cae3-4fbc-aec6-bf64f6d855ee.png"
     }
   ];
