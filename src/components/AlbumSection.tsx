@@ -40,7 +40,7 @@ const AlbumSection = () => {
     {
       title: "Ghum Bhangche",
       artistName: "Deenga",
-      coverImage: "/lovable-uploads/ad757762-558d-4403-b73c-45f6b0a41034.png",
+      coverImage: "/lovable-uploads/3658bc2e-7c49-4de7-8972-d7cbd605390e.png",
       spotifyUrl: "https://open.spotify.com/track/5PYCXXIEV4btw6kkJr9XGH?si=mOGDfOX5Qo6vXWE7NU5pEw"
     },
     {
