@@ -35,18 +35,26 @@ const AlbumSection = () => {
     }
   ];
   
-  const featuredSongs = [
+  const featuredVideos = [
     {
-      title: "Ghum Bhangche",
-      artistName: "Deenga",
-      coverImage: "/lovable-uploads/3658bc2e-7c49-4de7-8972-d7cbd605390e.png",
-      spotifyUrl: "https://open.spotify.com/track/5PYCXXIEV4btw6kkJr9XGH?si=mOGDfOX5Qo6vXWE7NU5pEw"
+      title: "Deenga Showreel",
+      videoId: "dq2bBjBMUNI"
     },
     {
-      title: "Radhabhabi",
-      artistName: "Deenga",
-      coverImage: "/lovable-uploads/5964242e-f830-4719-a1fe-09dd6e1ece60.png",
-      spotifyUrl: "https://open.spotify.com/track/7EBOwk8UKEVMzUTBaetiZN?si=XKe-h0BgSleCypUMBmI4wA"
+      title: "Pagol",
+      videoId: "4H2AREQMEwk"
+    },
+    {
+      title: "Basonto Batashe",
+      videoId: "wjhHG2AH2CM"
+    },
+    {
+      title: "Dine Dine",
+      videoId: "cB2qyS2ri6A"
+    },
+    {
+      title: "Khejur Gache Hari Badho Mon",
+      videoId: "itHnXUCDGdk"
     }
   ];
 
@@ -59,17 +67,21 @@ const AlbumSection = () => {
         <h2 className="section-heading text-center text-white">Our <span className="text-deenga-purple">Music</span></h2>
         
         <div className="mb-16">
-          <h3 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8 text-white">Featured Songs</h3>
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {featuredSongs.map((song) => (
-              <div key={song.title} className="bg-[#14141c]/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 overflow-hidden">
-                <MusicPlayer
-                  key={song.title}
-                  title={song.title}
-                  artistName={song.artistName}
-                  coverImage={song.coverImage}
-                  spotifyUrl={song.spotifyUrl}
-                />
+          <h3 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8 text-white">Featured Videos</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {featuredVideos.map((video) => (
+              <div key={video.videoId} className="bg-[#14141c]/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-4 overflow-hidden hover:border-deenga-purple/50 transition-colors">
+                <div className="relative w-full pb-[56.25%] mb-4 rounded-lg overflow-hidden">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${video.videoId}`}
+                    title={video.title}
+                    className="absolute top-0 left-0 w-full h-full"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+                <h4 className="text-white font-medium text-center">{video.title}</h4>
               </div>
             ))}
           </div>
