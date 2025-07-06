@@ -55,6 +55,10 @@ const AlbumSection = () => {
     {
       title: "Khejur Gache Hari Badho Mon",
       videoId: "itHnXUCDGdk"
+    },
+    {
+      title: "Khaja Baba",
+      videoId: "1Zxj3Azvoxg"
     }
   ];
 
