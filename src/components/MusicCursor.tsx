@@ -1,5 +1,17 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 
+interface Particle {
+  id: number;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  life: number;
+  maxLife: number;
+  size: number;
+  opacity: number;
+}
+
 interface ColorState {
   r: number;
   g: number;
@@ -10,9 +22,11 @@ const MusicCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [hoverType, setHoverType] = useState<'button' | 'image' | 'text' | 'default'>('default');
+  const [particles, setParticles] = useState<Particle[]>([]);
   const [currentColor, setCurrentColor] = useState<ColorState>({ r: 250, g: 204, b: 21 });
   
   const animationRef = useRef<number>();
+  const particleIdRef = useRef(0);
   const colorTransitionRef = useRef(0);
   
   const brandColors = [
@@ -31,9 +45,31 @@ const MusicCursor = () => {
     };
   }, []);
 
+  const createParticle = useCallback((x: number, y: number) => {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = Math.random() * 1.5 + 0.5;
+    
+    return {
+      id: particleIdRef.current++,
+      x: x + (Math.random() - 0.5) * 20,
+      y: y + (Math.random() - 0.5) * 20,
+      vx: Math.cos(angle) * speed * 0.3,
+      vy: -Math.random() * 2 - 0.5, // Always drift upward
+      life: 120,
+      maxLife: 120,
+      size: Math.random() * 3 + 2,
+      opacity: 1,
+    };
+  }, []);
+
   const updateMousePosition = useCallback((e: MouseEvent) => {
     setMousePosition({ x: e.clientX, y: e.clientY });
-  }, []);
+    
+    // Spawn particles on movement
+    if (Math.random() < 0.4) {
+      setParticles(prev => [...prev, createParticle(e.clientX, e.clientY)]);
+    }
+  }, [createParticle]);
 
   const handleMouseOver = useCallback((e: MouseEvent) => {
     const target = e.target as HTMLElement;
@@ -56,17 +92,39 @@ const MusicCursor = () => {
     setHoverType('default');
   }, []);
 
+  const handleClick = useCallback((e: MouseEvent) => {
+    // Burst of particles on click
+    for (let i = 0; i < 8; i++) {
+      setTimeout(() => {
+        setParticles(prev => [...prev, createParticle(e.clientX, e.clientY)]);
+      }, i * 20);
+    }
+  }, [createParticle]);
+
   // Main animation loop
   useEffect(() => {
     const animate = () => {
       // Smooth color transition
-      colorTransitionRef.current += 0.008; // Slower transition for smoothness
+      colorTransitionRef.current += 0.008;
       const colorIndex = Math.floor(colorTransitionRef.current) % brandColors.length;
       const nextColorIndex = (colorIndex + 1) % brandColors.length;
       const factor = colorTransitionRef.current - Math.floor(colorTransitionRef.current);
       
       const newColor = lerpColor(brandColors[colorIndex], brandColors[nextColorIndex], factor);
       setCurrentColor(newColor);
+
+      // Update particles with physics
+      setParticles(prev => 
+        prev.map(particle => ({
+          ...particle,
+          x: particle.x + particle.vx,
+          y: particle.y + particle.vy,
+          vx: particle.vx * 0.99, // Air resistance
+          vy: particle.vy - 0.01, // Gravity (upward drift)
+          life: particle.life - 1,
+          opacity: (particle.life / particle.maxLife) * (particle.life > 20 ? 1 : particle.life / 20),
+        })).filter(particle => particle.life > 0)
+      );
 
       animationRef.current = requestAnimationFrame(animate);
     };
@@ -85,13 +143,15 @@ const MusicCursor = () => {
     document.addEventListener('mousemove', updateMousePosition);
     document.addEventListener('mouseover', handleMouseOver);
     document.addEventListener('mouseout', handleMouseOut);
+    document.addEventListener('click', handleClick);
 
     return () => {
       document.removeEventListener('mousemove', updateMousePosition);
       document.removeEventListener('mouseover', handleMouseOver);
       document.removeEventListener('mouseout', handleMouseOut);
+      document.removeEventListener('click', handleClick);
     };
-  }, [updateMousePosition, handleMouseOver, handleMouseOut]);
+  }, [updateMousePosition, handleMouseOver, handleMouseOut, handleClick]);
 
   const getCursorSize = () => {
     switch (hoverType) {
@@ -106,8 +166,8 @@ const MusicCursor = () => {
     return isHovering ? 1.8 : 1;
   };
 
-  const colorString = `rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, 0.3)`;
-  const glowColor = `rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, 0.15)`;
+  const colorString = `rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, 0.8)`;
+  const glowColor = `rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, 0.4)`;
 
   return (
     <>
@@ -131,11 +191,29 @@ const MusicCursor = () => {
           width: `${getCursorSize() * 4}px`,
           height: `${getCursorSize() * 4}px`,
           transform: `translate(${mousePosition.x - (getCursorSize() * 4)/2}px, ${mousePosition.y - (getCursorSize() * 4)/2}px) scale(${getCursorScale() * 0.8})`,
-          border: `1px solid rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, 0.2)`,
+          border: `1px solid rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, 0.5)`,
           boxShadow: `0 0 60px 20px ${glowColor}`,
           willChange: 'transform',
         }}
       />
+
+      {/* Particles */}
+      {particles.map(particle => (
+        <div
+          key={particle.id}
+          className="fixed pointer-events-none z-48 rounded-full"
+          style={{
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
+            transform: `translate(${particle.x - particle.size/2}px, ${particle.y - particle.size/2}px)`,
+            opacity: particle.opacity,
+            backgroundColor: `rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, ${particle.opacity})`,
+            boxShadow: `0 0 ${particle.size * 4}px ${particle.size}px rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, ${particle.opacity * 0.5})`,
+            filter: 'blur(0.5px)',
+            willChange: 'transform',
+          }}
+        />
+      ))}
     </>
   );
 };
