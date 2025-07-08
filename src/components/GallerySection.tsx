@@ -7,8 +7,8 @@ const GallerySection = () => {
     },
     {
       id: 2,
-      src: "/lovable-uploads/e3a086b0-c296-49b7-8f54-30d88a423bbf.png",
-      alt: "Deenga band group photo with awards and recognition"
+      src: "/lovable-uploads/337128e9-8929-4890-9509-fef162810671.png",
+      alt: "Concert performance with yellow stage lights"
     },
     {
       id: 3,
@@ -42,8 +42,8 @@ const GallerySection = () => {
     },
     {
       id: 9,
-      src: "/lovable-uploads/337128e9-8929-4890-9509-fef162810671.png",
-      alt: "Concert performance with yellow stage lights"
+      src: "/lovable-uploads/e3a086b0-c296-49b7-8f54-30d88a423bbf.png",
+      alt: "Deenga band group photo with awards and recognition"
     }
   ];
 
