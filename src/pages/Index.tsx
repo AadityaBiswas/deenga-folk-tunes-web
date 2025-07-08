@@ -8,54 +8,22 @@ import GallerySection from "../components/GallerySection";
 import AlbumSection from "../components/AlbumSection";
 import ContactSection from "../components/ContactSection";
 import Footer from "../components/Footer";
+import EnhancedCursor from "../components/EnhancedCursor";
 import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const Index = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [glowSize, setGlowSize] = useState(18);
-  const [glowOpacity, setGlowOpacity] = useState(0.5);
 
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > window.innerHeight * 0.5);
     };
 
-    const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('mousemove', updateMousePosition);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('mousemove', updateMousePosition);
-    };
-  }, []);
-
-  // Cursor glow animation - always active
-  useEffect(() => {
-    let cursorAnimationId: number;
-    const cursorTime = { current: 0 };
-    
-    const animateCursor = () => {
-      cursorTime.current += 1;
-      
-      const newSize = 18 + Math.sin(cursorTime.current / 100) * 7;
-      setGlowSize(newSize);
-      
-      const newOpacity = 0.5 + Math.sin(cursorTime.current / 75) * 0.3;
-      setGlowOpacity(newOpacity);
-      
-      cursorAnimationId = requestAnimationFrame(animateCursor);
-    };
-    
-    cursorAnimationId = requestAnimationFrame(animateCursor);
-    
-    return () => {
-      cancelAnimationFrame(cursorAnimationId);
     };
   }, []);
 
@@ -68,22 +36,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden" style={{ cursor: 'none' }}>
-      {/* Cursor glow effect - always visible */}
-      <div
-        className="fixed pointer-events-none z-50"
-        style={{
-          width: `${glowSize}px`,
-          height: `${glowSize}px`,
-          transform: `translate(${mousePosition.x - glowSize/2}px, ${mousePosition.y - glowSize/2}px)`,
-          opacity: glowOpacity,
-          borderRadius: '50%',
-          background: 'transparent',
-          boxShadow: `0 0 30px 20px rgba(250, 204, 21, 0.45)`,
-          filter: 'blur(3px)',
-          willChange: 'transform',
-          transition: 'width 0.2s ease-out, height 0.2s ease-out',
-        }}
-      />
+      {/* Enhanced Cursor */}
+      <EnhancedCursor />
 
       {/* Scroll to top button */}
       <button
