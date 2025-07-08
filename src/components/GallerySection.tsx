@@ -2,8 +2,8 @@ const GallerySection = () => {
   const galleryImages = [
     {
       id: 1,
-      src: "/lovable-uploads/cc912f0a-6ad5-409b-bc9d-8484b28e30a9.png",
-      alt: "Deenga live performance with stage lights"
+      src: "/lovable-uploads/fadb19dd-8872-4dfe-a4cd-a00461e135c6.png",
+      alt: "Concert venue with warm lighting and stage setup"
     },
     {
       id: 2,
