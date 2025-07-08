@@ -8,7 +8,7 @@ import GallerySection from "../components/GallerySection";
 import AlbumSection from "../components/AlbumSection";
 import ContactSection from "../components/ContactSection";
 import Footer from "../components/Footer";
-import EnhancedCursor from "../components/EnhancedCursor";
+import MusicCursor from "../components/MusicCursor";
 import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -36,8 +36,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden" style={{ cursor: 'none' }}>
-      {/* Enhanced Cursor */}
-      <EnhancedCursor />
+      {/* Music Cursor */}
+      <MusicCursor />
 
       {/* Scroll to top button */}
       <button
