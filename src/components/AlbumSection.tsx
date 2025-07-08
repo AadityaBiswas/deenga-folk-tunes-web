@@ -22,7 +22,7 @@ const AlbumSection = () => {
       id: "ghum-bhangche",
       title: "Ghum Bhangche",
       year: 2023,
-      coverImage: "/lovable-uploads/88d35b81-6f9f-40e4-8494-7c7ca81f7fd2.png",
+      coverImage: "/lovable-uploads/519255da-2178-4d74-9d2c-a2324b0d585e.png",
       spotifyUrl: "https://open.spotify.com/artist/1zx7gKZWy8NJWCSYtMmdTD?si=gLOjoEv0Q8G4axJ7NdGOnQ",
       tracks: [
         { title: "Radha Radha" },
