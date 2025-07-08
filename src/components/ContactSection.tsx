@@ -1,184 +1,136 @@
 
-import { useState } from "react";
-import { cn } from "@/lib/utils";
-import { Facebook, Instagram, Youtube, Music } from "lucide-react";
+import { Facebook, Instagram, Youtube, Music, Twitter } from "lucide-react";
 
 const ContactSection = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 1500);
-  };
-
   return (
     <section id="contact" className="section-padding relative bg-gradient-to-b from-[#172032] to-[#13151D]">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-deenga-purple/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-deenga-pink/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-gradient-to-r from-deenga-purple/5 to-deenga-pink/5 rounded-full blur-3xl"></div>
+      </div>
+      
       <div className="container mx-auto px-4 relative z-10">
-        <h2 className="section-heading text-center text-white">Get in <span className="text-deenga-purple">Touch</span></h2>
+        <h2 className="section-heading text-center text-white mb-16">Get in <span className="text-deenga-purple">Touch</span></h2>
         
-        <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          <div>
-            <h3 className="text-2xl font-serif font-semibold text-white mb-6">Contact Information</h3>
+        <div className="max-w-4xl mx-auto">
+          {/* Contact Information Card */}
+          <div className="bg-gradient-to-br from-[#14141c]/80 to-[#0f1219]/80 backdrop-blur-sm border border-gray-800/50 rounded-3xl p-8 md:p-12 shadow-2xl">
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-serif font-semibold text-white mb-4">Let's Connect</h3>
+              <p className="text-gray-300 text-lg">Reach out to us for collaborations, bookings, or just to say hello!</p>
+            </div>
             
-            <div className="space-y-6">
-              <div>
-                <p className="text-lg font-medium text-white">Email</p>
-                <a 
-                  href="mailto:deengamusicoffical@gmail.com" 
-                  className="text-gray-300 hover:text-deenga-purple transition-colors duration-200"
-                >
-                  deengamusicoffical@gmail.com
-                </a>
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              {/* Email */}
+              <div className="group">
+                <div className="bg-[#0f1219]/50 border border-gray-700/50 rounded-2xl p-6 hover:border-deenga-purple/50 transition-all duration-300 hover:transform hover:scale-105">
+                  <div className="flex items-center mb-3">
+                    <div className="w-12 h-12 bg-gradient-to-r from-deenga-purple to-deenga-pink rounded-full flex items-center justify-center mr-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <p className="text-lg font-medium text-white">Email</p>
+                  </div>
+                  <a 
+                    href="mailto:deengamusicoffical@gmail.com" 
+                    className="text-gray-300 hover:text-deenga-purple transition-colors duration-200 text-sm"
+                  >
+                    deengamusicoffical@gmail.com
+                  </a>
+                </div>
               </div>
-              
-              <div>
-                <p className="text-lg font-medium text-white">Phone</p>
-                <a 
-                  href="tel:+919748556483" 
-                  className="text-gray-300 hover:text-deenga-purple transition-colors duration-200"
-                >
-                  +91 9748556483
-                </a>
+
+              {/* Phone */}
+              <div className="group">
+                <div className="bg-[#0f1219]/50 border border-gray-700/50 rounded-2xl p-6 hover:border-deenga-purple/50 transition-all duration-300 hover:transform hover:scale-105">
+                  <div className="flex items-center mb-3">
+                    <div className="w-12 h-12 bg-gradient-to-r from-deenga-purple to-deenga-pink rounded-full flex items-center justify-center mr-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                    </div>
+                    <p className="text-lg font-medium text-white">Phone</p>
+                  </div>
+                  <a 
+                    href="tel:+919748556483" 
+                    className="text-gray-300 hover:text-deenga-purple transition-colors duration-200"
+                  >
+                    +91 9748556483
+                  </a>
+                </div>
               </div>
-              
-              <div>
-                <p className="text-lg font-medium text-white">Location</p>
-                <p className="text-gray-300">Kolkata, India</p>
-              </div>
-              
-              <div>
-                <p className="text-lg font-medium text-white mb-3">Follow Us</p>
-                <div className="flex gap-4">
-                  <a 
-                    href="https://www.facebook.com/official.deenga"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-[#0f1219] flex items-center justify-center hover:bg-deenga-purple transition-colors duration-300"
-                    aria-label="Facebook"
-                  >
-                    <Facebook className="h-5 w-5 text-white" />
-                  </a>
-                  <a 
-                    href="https://www.instagram.com/deengaofficial"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-[#0f1219] flex items-center justify-center hover:bg-deenga-purple transition-colors duration-300"
-                    aria-label="Instagram"
-                  >
-                    <Instagram className="h-5 w-5 text-white" />
-                  </a>
-                  <a 
-                    href="https://youtube.com/@deengaofficial"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-[#0f1219] flex items-center justify-center hover:bg-deenga-purple transition-colors duration-300"
-                    aria-label="YouTube"
-                  >
-                    <Youtube className="h-5 w-5 text-white" />
-                  </a>
-                  <a 
-                    href="https://open.spotify.com/artist/1zx7gKZWy8NJWCSYtMmdTD"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-[#0f1219] flex items-center justify-center hover:bg-deenga-purple transition-colors duration-300"
-                    aria-label="Spotify"
-                  >
-                    <Music className="h-5 w-5 text-white" />
-                  </a>
+
+              {/* Location */}
+              <div className="group md:col-span-2">
+                <div className="bg-[#0f1219]/50 border border-gray-700/50 rounded-2xl p-6 hover:border-deenga-purple/50 transition-all duration-300 hover:transform hover:scale-105">
+                  <div className="flex items-center mb-3">
+                    <div className="w-12 h-12 bg-gradient-to-r from-deenga-purple to-deenga-pink rounded-full flex items-center justify-center mr-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    </div>
+                    <p className="text-lg font-medium text-white">Location</p>
+                  </div>
+                  <p className="text-gray-300">Kolkata, India</p>
                 </div>
               </div>
             </div>
-          </div>
-          
-          <div>
-            <h3 className="text-2xl font-serif font-semibold text-white mb-6">Send us a Message</h3>
             
-            {isSubmitted ? (
-              <div className="bg-[#0f1219]/70 border border-gray-700 rounded-lg p-6 text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-green-500 mb-4 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <h4 className="text-xl font-medium text-white mb-2">Message Sent!</h4>
-                <p className="text-gray-300">Thank you for reaching out. We'll get back to you soon.</p>
-                <button 
-                  onClick={() => setIsSubmitted(false)}
-                  className="mt-4 px-4 py-2 text-deenga-purple hover:underline"
+            {/* Social Media */}
+            <div className="text-center">
+              <p className="text-xl font-medium text-white mb-6">Follow Our Journey</p>
+              <div className="flex gap-4 justify-center">
+                <a 
+                  href="https://www.facebook.com/official.deenga"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative w-14 h-14 rounded-full bg-gradient-to-r from-[#0f1219] to-[#14141c] border border-gray-700/50 flex items-center justify-center hover:border-deenga-purple/50 transition-all duration-300 hover:transform hover:scale-110 hover:shadow-lg hover:shadow-deenga-purple/20"
+                  aria-label="Facebook"
                 >
-                  Send another message
-                </button>
+                  <Facebook className="h-6 w-6 text-white group-hover:text-deenga-purple transition-colors duration-300" />
+                </a>
+                <a 
+                  href="https://www.instagram.com/deengaofficial"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative w-14 h-14 rounded-full bg-gradient-to-r from-[#0f1219] to-[#14141c] border border-gray-700/50 flex items-center justify-center hover:border-deenga-purple/50 transition-all duration-300 hover:transform hover:scale-110 hover:shadow-lg hover:shadow-deenga-purple/20"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="h-6 w-6 text-white group-hover:text-deenga-purple transition-colors duration-300" />
+                </a>
+                <a 
+                  href="https://x.com/deenga_official?s=11&t=vuhyk1TdBLUChKuy6Wr0bQ"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative w-14 h-14 rounded-full bg-gradient-to-r from-[#0f1219] to-[#14141c] border border-gray-700/50 flex items-center justify-center hover:border-deenga-purple/50 transition-all duration-300 hover:transform hover:scale-110 hover:shadow-lg hover:shadow-deenga-purple/20"
+                  aria-label="X (Twitter)"
+                >
+                  <Twitter className="h-6 w-6 text-white group-hover:text-deenga-purple transition-colors duration-300" />
+                </a>
+                <a 
+                  href="https://youtube.com/@deengaofficial"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative w-14 h-14 rounded-full bg-gradient-to-r from-[#0f1219] to-[#14141c] border border-gray-700/50 flex items-center justify-center hover:border-deenga-purple/50 transition-all duration-300 hover:transform hover:scale-110 hover:shadow-lg hover:shadow-deenga-purple/20"
+                  aria-label="YouTube"
+                >
+                  <Youtube className="h-6 w-6 text-white group-hover:text-deenga-purple transition-colors duration-300" />
+                </a>
+                <a 
+                  href="https://open.spotify.com/artist/1zx7gKZWy8NJWCSYtMmdTD"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative w-14 h-14 rounded-full bg-gradient-to-r from-[#0f1219] to-[#14141c] border border-gray-700/50 flex items-center justify-center hover:border-deenga-purple/50 transition-all duration-300 hover:transform hover:scale-110 hover:shadow-lg hover:shadow-deenga-purple/20"
+                  aria-label="Spotify"
+                >
+                  <Music className="h-6 w-6 text-white group-hover:text-deenga-purple transition-colors duration-300" />
+                </a>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="name" className="block text-gray-300 mb-1">Name</label>
-                    <input
-                      type="text"
-                      id="name"
-                      required
-                      className="w-full px-4 py-2 bg-[#0f1219]/70 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-deenga-purple/50 text-white"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-gray-300 mb-1">Email</label>
-                    <input
-                      type="email"
-                      id="email"
-                      required
-                      className="w-full px-4 py-2 bg-[#0f1219]/70 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-deenga-purple/50 text-white"
-                    />
-                  </div>
-                </div>
-                
-                <div>
-                  <label htmlFor="subject" className="block text-gray-300 mb-1">Subject</label>
-                  <input
-                    type="text"
-                    id="subject"
-                    required
-                    className="w-full px-4 py-2 bg-[#0f1219]/70 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-deenga-purple/50 text-white"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block text-gray-300 mb-1">Message</label>
-                  <textarea
-                    id="message"
-                    rows={5}
-                    required
-                    className="w-full px-4 py-2 bg-[#0f1219]/70 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-deenga-purple/50 text-white"
-                  ></textarea>
-                </div>
-                
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={cn(
-                    "w-full md:w-auto px-6 py-3 bg-gradient-to-r from-deenga-purple to-deenga-pink text-white font-medium rounded-full hover:shadow-lg hover:shadow-deenga-purple/30 transition-all duration-300 flex items-center justify-center",
-                    isSubmitting && "opacity-70 cursor-not-allowed"
-                  )}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Sending...
-                    </>
-                  ) : (
-                    "Send Message"
-                  )}
-                </button>
-              </form>
-            )}
+            </div>
           </div>
         </div>
       </div>
